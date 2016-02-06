@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as CounterActions from '../actions/counter';
+import * as QuizActions from '../actions/quiz';
 import Header from '../components/Header';
-import Counter from '../components/Counter';
+import Quiz from '../components/Quiz';
 
 const App = (props) => {
-  const { counter, actions } = props;
+  const { quiz, actions } = props;
 
   return (
     <div style={styles.container}>
@@ -14,10 +14,10 @@ const App = (props) => {
         <Header title="Matchable Quiz" />
       </div>
       <div style={styles.body}>
-        <Counter
-          count={counter.count}
-          inc={actions.inc}
-          dec={actions.dec}
+        <Quiz
+          quiz={quiz}
+          setGameState={actions.setGameState}
+          reset={actions.reset}
         />
       </div>
     </div>
@@ -29,32 +29,31 @@ const styles = {
     display: 'flex',
     flexFlow: 'column',
     alignItems: 'stretch',
+    backgroundColor: '#ebf0f4',
     color: '#665e5e',
   },
   header: {
-    height: '15%',
-    backgroundColor: '#ebf0f4',
+    height: '10%',
   },
   body: {
-    height: '85%',
-    backgroundColor: '#d9d9d9',
+    height: '90%',
   },
 };
 
 App.propTypes = {
-  counter: PropTypes.object.isRequired,
+  quiz: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    counter: state.counter,
+    quiz: state.quiz,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(CounterActions, dispatch),
+    actions: bindActionCreators(QuizActions, dispatch),
   };
 }
 
