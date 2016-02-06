@@ -1,0 +1,9 @@
+html, body, div {
+  height: 100%;
+}
+
+body {
+  font: 18px 'Roboto Mono', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.2em;
+  font-weight: 300;
+}

@@ -1,0 +1,9 @@
+{
+  "extends": "airbnb",
+  "ecmaFeatures": {
+    "experimentalObjectRestSpread": 2
+  },
+  "rules": {
+    "no-use-before-define": 0
+  }
+}
