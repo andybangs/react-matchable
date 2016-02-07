@@ -20,8 +20,8 @@ const Paused = (props) => {
       </div>
 
       <div style={styles.bottom}>
-        <button style={styles.btn} onClick={play}>Resume</button>
-        <button style={styles.btn} onClick={quit}>Quit</button>
+        <button onClick={play}>Resume</button>
+        <button onClick={quit}>Quit</button>
       </div>
 
     </div>
@@ -32,13 +32,22 @@ const styles = {
   container: {
     display: 'flex',
     flexFlow: 'column',
-    alignItems: 'center',
+    alignItems: 'stretch',
+    justifyContent: 'center',
   },
   top: {
-    flex: 1,
+    height: '15%',
+    display: 'flex',
+    flexFlow: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   bottom: {
-    flex: 4,
+    height: '85%',
+    display: 'flex',
+    flexFlow: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
   state: {
     color: '#ed6868',

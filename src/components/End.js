@@ -33,15 +33,15 @@ const styles = {
     alignItems: 'stretch',
   },
   top: {
-    height: '10%',
+    height: '15%',
     display: 'flex',
     flexFlow: 'row',
-    alignItems: 'stretch',
+    alignItems: 'center',
     justifyContent: 'space-around',
     backgroundColor: '#b1e3fb',
   },
   bottom: {
-    height: '90%',
+    height: '85%',
     display: 'flex',
     justifyContent: 'center',
   },

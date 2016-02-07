@@ -22,6 +22,7 @@ const Quiz = (props) => {
     case PLAYING:
       return (
         <Playing
+          data={quiz.data}
           guessesRemaining={quiz.guessesRemaining}
           correct={quiz.correct}
           wrong={quiz.wrong}
