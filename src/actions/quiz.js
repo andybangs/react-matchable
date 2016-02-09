@@ -1,4 +1,4 @@
-import { SET_GAME_STATE, RESET } from '../constants/quiz';
+import { SET_GAME_STATE, RESET, SELECT_ITEM } from '../constants/quiz';
 
 export function setGameState(state) {
   return {
@@ -10,5 +10,13 @@ export function setGameState(state) {
 export function reset() {
   return {
     type: RESET,
+  };
+}
+
+export function selectItem(mid, id) {
+  return {
+    type: SELECT_ITEM,
+    mid,
+    id,
   };
 }

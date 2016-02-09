@@ -30,6 +30,7 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
+    "classnames": "^2.2.3",
     "lodash-es": "^4.2.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",

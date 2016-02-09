@@ -4,6 +4,7 @@
     "experimentalObjectRestSpread": 2
   },
   "rules": {
-    "no-use-before-define": 0
+    "no-use-before-define": 0,            // component styles object defined after component
+    "quote-props": 0                      // conditional classes with classnames
   }
 }

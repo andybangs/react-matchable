@@ -14,11 +14,7 @@ const App = (props) => {
         <Header title="Matchable Quiz" />
       </div>
       <div style={styles.body}>
-        <Quiz
-          quiz={quiz}
-          setGameState={actions.setGameState}
-          reset={actions.reset}
-        />
+        <Quiz quiz={quiz} actions={actions} />
       </div>
     </div>
   );

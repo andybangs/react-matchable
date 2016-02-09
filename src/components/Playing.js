@@ -1,29 +1,44 @@
 import React, { PropTypes } from 'react';
-import { shuffle, flatMap } from 'lodash';
+import cL from 'classnames';
 import Tile from './Tile';
 import { PAUSED } from '../constants/gameStates';
 
 const Playing = (props) => {
-  const { data, guessesRemaining, correct, wrong, setGameState } = props;
+  const { data, guessesRemaining, correct, wrong, setGameState, selectItem } = props;
 
   function pause() {
     setGameState(PAUSED);
   }
 
-  function buildColumn(arr, id) {
-    const items = shuffle(
-      flatMap(arr, m => m.items)
-        .filter(i => i.id === id)
-        .map(i => <li key={i.mid} style={styles.li}>{i.value}</li>)
-    );
-
-    return (
-      <ul style={styles.ul}>{items}</ul>
-    );
+  function select(i) {
+    selectItem(i.mid, i.id);
   }
 
-  const leftColumn = buildColumn(data, 1);
-  const rightColumn = buildColumn(data, 2);
+  // buildItem : Item -> Bool -> Func -> JSX
+  function buildItem(item, isMatched, handleItemClick) {
+    function handleClick() {
+      handleItemClick(item);
+    }
+
+    return (
+      <li key={`${item.mid}-${item.id}`}
+        onClick={handleClick}
+        className={cL('li', { 'selected': item.selected }, { 'matched': isMatched }) }
+      >{item.value}</li>
+  );
+  }
+
+  // buildColumn : Array Matchable -> JSX
+  function buildColumn(dataArr, id) {
+    const items = dataArr.map(m => [m.matched, m.items])
+      .map(arr => [arr[0], arr[1].filter(i => i.id === id)])
+      .map(arr => buildItem(arr[1][0], arr[0], select));
+
+    return <ul style={styles.ul}>{items}</ul>;
+  }
+
+  const leftColumn = buildColumn(data, 0);
+  const rightColumn = buildColumn(data, 1);
 
   return (
     <div style={styles.container}>
@@ -67,20 +82,11 @@ const styles = {
   ul: {
     paddingLeft: 0,
     listStyle: 'none',
-    padding: '2%',
     borderRadius: '4px',
     border: 'solid 1px',
     display: 'flex',
     flexFlow: 'column',
     justifyContent: 'space-around',
-  },
-  li: {
-    backgroundColor: '#fff',
-    padding: '5px',
-    borderRadius: '4px',
-    textAlign: 'center',
-    fontSize: '0.8em',
-    cursor: 'pointer',
   },
 };
 
@@ -90,6 +96,7 @@ Playing.propTypes = {
   correct: PropTypes.number.isRequired,
   wrong: PropTypes.number.isRequired,
   setGameState: PropTypes.func.isRequired,
+  selectItem: PropTypes.func.isRequired,
 };
 
 export default Playing;

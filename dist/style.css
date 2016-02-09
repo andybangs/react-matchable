@@ -7,3 +7,20 @@ body {
   line-height: 1.2em;
   font-weight: 300;
 }
+
+li {
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #fcffbd;
+}
+
+.matched {
+  background-color: #9ff5a9;
+}

@@ -6,7 +6,7 @@ import Paused from './Paused';
 import End from './End';
 
 const Quiz = (props) => {
-  const { quiz, setGameState, reset } = props;
+  const { quiz, actions } = props;
 
   switch (quiz.gameState) {
     case START:
@@ -15,7 +15,7 @@ const Quiz = (props) => {
           title={quiz.title}
           description={quiz.description}
           gameState={quiz.gameState}
-          setGameState={setGameState}
+          setGameState={actions.setGameState}
         />
       );
 
@@ -27,7 +27,8 @@ const Quiz = (props) => {
           correct={quiz.correct}
           wrong={quiz.wrong}
           gameState={quiz.gameState}
-          setGameState={setGameState}
+          setGameState={actions.setGameState}
+          selectItem={actions.selectItem}
         />
       );
 
@@ -35,7 +36,7 @@ const Quiz = (props) => {
       return (
         <Paused
           gameState={quiz.gameState}
-          setGameState={setGameState}
+          setGameState={actions.setGameState}
         />
       );
 
@@ -46,7 +47,7 @@ const Quiz = (props) => {
           correct={quiz.correct}
           wrong={quiz.wrong}
           gameState={quiz.gameState}
-          reset={reset}
+          reset={actions.reset}
         />
       );
 
@@ -54,7 +55,7 @@ const Quiz = (props) => {
       return (
         <Start
           gameState={quiz.gameState}
-          setGameState={setGameState}
+          setGameState={actions.setGameState}
         />
       );
   }
@@ -62,8 +63,7 @@ const Quiz = (props) => {
 
 Quiz.propTypes = {
   quiz: PropTypes.object.isRequired,
-  setGameState: PropTypes.func.isRequired,
-  reset: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
 export default Quiz;
