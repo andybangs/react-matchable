@@ -34,6 +34,7 @@ const initialState = {
   guessesRemaining: 5,
   correct: 0,
   wrong: 0,
+  attempted: [],
   gameState: START,
 };
 
@@ -52,10 +53,7 @@ function deselectItems(items) {
 export default function quiz(state = initialState, action) {
   switch (action.type) {
     case SET_GAME_STATE:
-      return {
-        ...state,
-        gameState: action.gameState,
-      };
+      return { ...state, gameState: action.gameState };
 
     case RESET:
       return initialState;
@@ -82,14 +80,13 @@ export default function quiz(state = initialState, action) {
 
       // If 0 or 1 items are currently selected, return state with the toggled item
       if (selectedItems.length === 0 || selectedItems.length === 1) {
-        return { ...state, data: newData };
+        return { ...state, data: newData, attempted: [] };
       }
 
       // If the previously selected item is from the same column (it has the same id)...
       if (selectedItems[0][1] === selectedItems[1][1]) {
         // selectedStr : Array String
         const selectedStr = selectedItems.map(arr => arr.toString());
-
         // newData2 : Array Matchable
         const newData2 = newData.map(m => {
           // ...check to make sure it's not the most recently selected item,
@@ -100,9 +97,8 @@ export default function quiz(state = initialState, action) {
           }
           return m;
         });
-
         // ...and return state with only the most recently toggled item selected
-        return { ...state, data: newData2 };
+        return { ...state, data: newData2, attempted: [] };
       }
 
       // Initialize variable for new state to be returned
@@ -113,40 +109,36 @@ export default function quiz(state = initialState, action) {
         const newData3 = newData.map(m => {
           if (m.id === action.mid) {
             // ...deselect both items and set matched property to true
-            return {
-              ...m,
-              items: deselectItems(m.items),
-              matched: true,
-            };
+            return { ...m, items: deselectItems(m.items), matched: true };
           }
           return m;
         });
-
         // Assign newState object to variable declared above
         newState = {
           ...state,
           data: newData3,
           guessesRemaining: state.guessesRemaining - 1,
           correct: state.correct + 1,
+          attempted: [],
         };
       }
 
       // If the previously selected item doesn't create a match (it has a different mid)...
       if (selectedItems[0][0] !== selectedItems[1][0]) {
         const newData4 = newData.map(m => {
-          // ...deselect both items
           if (m.id === selectedItems[0][0] || m.id === selectedItems[1][0]) {
+            // ...deselect both items
             return { ...m, items: deselectItems(m.items) };
           }
           return m;
         });
-
         // Assign newState object to variable declared above
         newState = {
           ...state,
           data: newData4,
           guessesRemaining: state.guessesRemaining - 1,
           wrong: state.wrong + 1,
+          attempted: selectedItems,
         };
       }
 

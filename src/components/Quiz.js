@@ -26,6 +26,7 @@ const Quiz = (props) => {
           guessesRemaining={quiz.guessesRemaining}
           correct={quiz.correct}
           wrong={quiz.wrong}
+          attempted={quiz.attempted}
           gameState={quiz.gameState}
           setGameState={actions.setGameState}
           selectItem={actions.selectItem}

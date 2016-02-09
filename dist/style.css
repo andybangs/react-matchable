@@ -21,6 +21,57 @@ li {
   background-color: #fcffbd;
 }
 
+@-webkit-keyframes matched {
+    0% {
+        background-color: #fff;
+        opacity:1;
+    }
+    22% {
+        background-color: #9ff5a9;
+    }
+    77% {
+        background-color: #9ff5a9;
+    }
+    100% {
+        background-color: #9ff5a9;
+    }
+}
+
 .matched {
   background-color: #9ff5a9;
+  -webkit-animation-name: matched;
+    -webkit-animation-duration: 500ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+  -moz-animation-name: matched;
+    -moz-animation-duration: 500ms;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: linear;
+}
+
+@-webkit-keyframes attempted {
+    0% {
+        background-color: #f58471;
+        opacity:1;
+    }
+    22% {
+        background-color: #f58471;
+    }
+    77% {
+        background-color: #f58471;
+    }
+    100% {
+        background-color: #fff;
+    }
+}
+
+.attempted {
+  -webkit-animation-name: attempted;
+    -webkit-animation-duration: 700ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+  -moz-animation-name: attempted;
+    -moz-animation-duration: 700ms;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: linear;
 }

@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
+import { flatten } from 'lodash';
 import cL from 'classnames';
 import Tile from './Tile';
 import { PAUSED } from '../constants/gameStates';
 
 const Playing = (props) => {
-  const { data, guessesRemaining, correct, wrong, setGameState, selectItem } = props;
+  const { data, guessesRemaining, correct, wrong, attempted, setGameState, selectItem } = props;
 
   function pause() {
     setGameState(PAUSED);
@@ -14,8 +15,8 @@ const Playing = (props) => {
     selectItem(i.mid, i.id);
   }
 
-  // buildItem : Item -> Bool -> Func -> JSX
-  function buildItem(item, isMatched, handleItemClick) {
+  // buildItem : Item -> Bool -> [mid, id] -> Func -> JSX
+  function buildItem(item, isMatched, attemptedItem, handleItemClick) {
     function handleClick() {
       handleItemClick(item);
     }
@@ -23,22 +24,30 @@ const Playing = (props) => {
     return (
       <li key={`${item.mid}-${item.id}`}
         onClick={handleClick}
-        className={cL('li', { 'selected': item.selected }, { 'matched': isMatched }) }
+        className={cL(
+          'li',
+          { 'selected': item.selected },
+          { 'matched': isMatched },
+          { 'attempted': attemptedItem[0] === item.mid }
+        )}
       >{item.value}</li>
   );
   }
 
-  // buildColumn : Array Matchable -> JSX
-  function buildColumn(dataArr, id) {
+  // buildColumn : Array Matchable -> [mid, id] -> Number -> JSX
+  function buildColumn(dataArr, attemptedItem, id) {
     const items = dataArr.map(m => [m.matched, m.items])
       .map(arr => [arr[0], arr[1].filter(i => i.id === id)])
-      .map(arr => buildItem(arr[1][0], arr[0], select));
+      .map(arr => buildItem(arr[1][0], arr[0], attemptedItem, select));
 
     return <ul style={styles.ul}>{items}</ul>;
   }
 
-  const leftColumn = buildColumn(data, 0);
-  const rightColumn = buildColumn(data, 1);
+  const leftAttempt = attempted.length > 0 ? flatten(attempted.filter(arr => arr[1] === 0)) : [];
+  const rightAttempt = attempted.length > 0 ? flatten(attempted.filter(arr => arr[1] === 1)) : [];
+
+  const leftColumn = buildColumn(data, leftAttempt, 0);
+  const rightColumn = buildColumn(data, rightAttempt, 1);
 
   return (
     <div style={styles.container}>
@@ -95,6 +104,7 @@ Playing.propTypes = {
   guessesRemaining: PropTypes.number.isRequired,
   correct: PropTypes.number.isRequired,
   wrong: PropTypes.number.isRequired,
+  attempted: PropTypes.array.isRequired,
   setGameState: PropTypes.func.isRequired,
   selectItem: PropTypes.func.isRequired,
 };
