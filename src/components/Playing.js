@@ -33,7 +33,6 @@ const Playing = (props) => {
       <li key={`${item.mid}-${item.id}`}
         onClick={handleClick}
         className={cL(
-          'li',
           { 'selected': item.selected },
           { 'matched': isMatched },
           { 'attempted': attemptedItem[0] === item.mid }
@@ -66,8 +65,11 @@ const Playing = (props) => {
       </div>
 
       <div style={styles.bottom}>
+        <div style={styles.divider}></div>
         {leftColumn}
+        <div style={styles.divider}></div>
         {rightColumn}
+        <div style={styles.divider}></div>
       </div>
 
     </div>
@@ -86,22 +88,26 @@ const styles = {
     flexFlow: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: '#b1e3fb',
   },
   bottom: {
     height: '85%',
     display: 'flex',
     flexFlow: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  divider: {
+    flex: 1,
   },
   ul: {
-    paddingLeft: 0,
+    flex: 7,
+    height: '90%',
+    padding: 0,
+    margin: 0,
     listStyle: 'none',
     display: 'flex',
     flexFlow: 'row',
     flexWrap: 'wrap',
-    alignItems: 'center',
+    alignContent: 'flex-start',
     justifyContent: 'center',
   },
 };

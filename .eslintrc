@@ -5,6 +5,7 @@
   },
   "rules": {
     "no-use-before-define": 0,            // component styles object defined after component
-    "quote-props": 0                      // conditional classes with classnames
+    "quote-props": 0,                     // conditional classes with classnames
+    "max-len": 1                          // warn if line-length exceeds 100
   }
 }

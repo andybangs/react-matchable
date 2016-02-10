@@ -3,23 +3,28 @@ import Tile from './Tile';
 import { RESET } from '../constants/quiz';
 
 const End = (props) => {
-  const { correct, wrong, reset } = props;
+  const { correct, quizLength, reset } = props;
 
   function retry() {
     reset(RESET);
+  }
+
+  // calcScore : Number -> Number -> String
+  function calcScore(numCorrect, numTotal) {
+    return `${Math.round(Math.round((numCorrect / numTotal) * 1000) / 10)}%`;
   }
 
   return (
     <div style={styles.container}>
 
       <div style={styles.top}>
-        <Tile header="Correct" value={correct} />
-        <Tile header="Wrong" value={wrong} />
+        <Tile header="You got" value={calcScore(correct, quizLength)} />
+        <Tile header="Score" value={`${correct}/${quizLength}`} />
         <button onClick={retry}>Try Again</button>
       </div>
 
       <div style={styles.bottom}>
-        <h1>Quiz results go here!</h1>
+        <h3>Quiz results go here!</h3>
       </div>
 
     </div>
@@ -38,7 +43,6 @@ const styles = {
     flexFlow: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: '#b1e3fb',
   },
   bottom: {
     height: '85%',
@@ -48,9 +52,8 @@ const styles = {
 };
 
 End.propTypes = {
-  guessesRemaining: PropTypes.number.isRequired,
   correct: PropTypes.number.isRequired,
-  wrong: PropTypes.number.isRequired,
+  quizLength: PropTypes.number.isRequired,
   reset: PropTypes.func.isRequired,
 };
 

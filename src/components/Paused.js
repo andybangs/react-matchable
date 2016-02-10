@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
+import Tile from './Tile';
 import { PLAYING, END } from '../constants/gameStates';
 
 const Paused = (props) => {
-  const { gameState, setGameState } = props;
+  const { guessesRemaining, correct, wrong, setGameState } = props;
 
   function play() {
     setGameState(PLAYING);
@@ -16,12 +17,15 @@ const Paused = (props) => {
     <div style={styles.container}>
 
       <div style={styles.top}>
-        <h3 style={styles.state}>Game State: {gameState}</h3>
+        <Tile header="Remaining" value={guessesRemaining} />
+        <Tile header="Correct" value={correct} />
+        <Tile header="Wrong" value={wrong} />
+        <button onClick={play}>Resume</button>
       </div>
 
       <div style={styles.bottom}>
-        <button onClick={play}>Resume</button>
-        <button onClick={quit}>Quit</button>
+        <h3>Phew! Take a breath.</h3>
+        <button onClick={quit}>I'm over it!</button>
       </div>
 
     </div>
@@ -45,9 +49,9 @@ const styles = {
   bottom: {
     height: '85%',
     display: 'flex',
-    flexFlow: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
+    flexFlow: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   state: {
     color: '#ed6868',
@@ -55,7 +59,9 @@ const styles = {
 };
 
 Paused.propTypes = {
-  gameState: PropTypes.string.isRequired,
+  guessesRemaining: PropTypes.number.isRequired,
+  correct: PropTypes.number.isRequired,
+  wrong: PropTypes.number.isRequired,
   setGameState: PropTypes.func.isRequired,
 };
 

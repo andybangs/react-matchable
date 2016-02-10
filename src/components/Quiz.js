@@ -14,7 +14,6 @@ const Quiz = (props) => {
         <Start
           title={quiz.title}
           description={quiz.description}
-          gameState={quiz.gameState}
           setGameState={actions.setGameState}
         />
       );
@@ -36,7 +35,9 @@ const Quiz = (props) => {
     case PAUSED:
       return (
         <Paused
-          gameState={quiz.gameState}
+          guessesRemaining={quiz.guessesRemaining}
+          correct={quiz.correct}
+          wrong={quiz.wrong}
           setGameState={actions.setGameState}
         />
       );
@@ -44,10 +45,8 @@ const Quiz = (props) => {
     case END:
       return (
         <End
-          guessesRemaining={quiz.guessesRemaining}
           correct={quiz.correct}
-          wrong={quiz.wrong}
-          gameState={quiz.gameState}
+          quizLength={quiz.columns[0].length}
           reset={actions.reset}
         />
       );
@@ -55,7 +54,8 @@ const Quiz = (props) => {
     default:
       return (
         <Start
-          gameState={quiz.gameState}
+          title={quiz.title}
+          description={quiz.description}
           setGameState={actions.setGameState}
         />
       );

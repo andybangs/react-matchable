@@ -28,7 +28,10 @@ const styles = {
 
 Tile.propTypes = {
   header: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
 };
 
 export default Tile;
