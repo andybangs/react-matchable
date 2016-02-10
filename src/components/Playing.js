@@ -92,16 +92,17 @@ const styles = {
     height: '85%',
     display: 'flex',
     flexFlow: 'row',
-    justifyContent: 'space-around',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
   ul: {
     paddingLeft: 0,
     listStyle: 'none',
-    borderRadius: '4px',
-    border: 'solid 1px',
     display: 'flex',
-    flexFlow: 'column',
-    justifyContent: 'space-around',
+    flexFlow: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 };
 
