@@ -5,7 +5,15 @@ import Tile from './Tile';
 import { PAUSED } from '../constants/gameStates';
 
 const Playing = (props) => {
-  const { data, guessesRemaining, correct, wrong, attempted, setGameState, selectItem } = props;
+  const {
+    columns,
+    guessesRemaining,
+    correct,
+    wrong,
+    attempted,
+    setGameState,
+    selectItem,
+  } = props;
 
   function pause() {
     setGameState(PAUSED);
@@ -31,14 +39,12 @@ const Playing = (props) => {
           { 'attempted': attemptedItem[0] === item.mid }
         )}
       >{item.value}</li>
-  );
+    );
   }
 
-  // buildColumn : Array Matchable -> [mid, id] -> Number -> JSX
-  function buildColumn(dataArr, attemptedItem, id) {
-    const items = dataArr.map(m => [m.matched, m.items])
-      .map(arr => [arr[0], arr[1].filter(i => i.id === id)])
-      .map(arr => buildItem(arr[1][0], arr[0], attemptedItem, select));
+  // buildColumn : Array Matchable -> [mid : Number, id : Number] -> JSX
+  function buildColumn(columnArr, attemptedItem) {
+    const items = columnArr.map(m => buildItem(m.items[0], m.matched, attemptedItem, select));
 
     return <ul style={styles.ul}>{items}</ul>;
   }
@@ -46,8 +52,8 @@ const Playing = (props) => {
   const leftAttempt = attempted.length > 0 ? flatten(attempted.filter(arr => arr[1] === 0)) : [];
   const rightAttempt = attempted.length > 0 ? flatten(attempted.filter(arr => arr[1] === 1)) : [];
 
-  const leftColumn = buildColumn(data, leftAttempt, 0);
-  const rightColumn = buildColumn(data, rightAttempt, 1);
+  const leftColumn = buildColumn(columns[0], leftAttempt);
+  const rightColumn = buildColumn(columns[1], rightAttempt);
 
   return (
     <div style={styles.container}>
@@ -100,7 +106,7 @@ const styles = {
 };
 
 Playing.propTypes = {
-  data: PropTypes.array.isRequired,
+  columns: PropTypes.array.isRequired,
   guessesRemaining: PropTypes.number.isRequired,
   correct: PropTypes.number.isRequired,
   wrong: PropTypes.number.isRequired,
