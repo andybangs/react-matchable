@@ -183,7 +183,9 @@ export default function quiz(state = initialState, action) {
       }
 
       // If no guesses remain, end the game
-      if (newState.guessesRemaining === 0) newState = { ...newState, gameState: END };
+      if (newState.guessesRemaining === 0) {
+        newState = { ...newState, gameState: END, timerState: STOPPED };
+      }
 
       return newState;
 
