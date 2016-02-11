@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Tile from './Tile';
 import { PLAYING, END } from '../constants/gameStates';
+import formatTime from '../util/formatTime';
 
 const Paused = (props) => {
   const { guessesRemaining, correct, wrong, timerSeconds, setGameState } = props;
@@ -17,10 +18,10 @@ const Paused = (props) => {
     <div style={styles.container}>
 
       <div style={styles.top}>
-        <Tile header="Remaining" value={guessesRemaining} />
+        <Tile header="Guesses Remaining" value={guessesRemaining} />
         <Tile header="Correct" value={correct} />
         <Tile header="Wrong" value={wrong} />
-        <Tile header="Time" value={timerSeconds} />
+        <Tile header="Timer" value={formatTime(timerSeconds)} />
         <button onClick={play}>Resume</button>
       </div>
 

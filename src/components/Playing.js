@@ -3,6 +3,7 @@ import { flatten } from 'lodash';
 import cL from 'classnames';
 import Tile from './Tile';
 import { PAUSED } from '../constants/gameStates';
+import formatTime from '../util/formatTime';
 
 const Playing = (props) => {
   const {
@@ -59,10 +60,10 @@ const Playing = (props) => {
     <div style={styles.container}>
 
       <div style={styles.top}>
-        <Tile header="Remaining" value={guessesRemaining} />
+        <Tile header="Guesses Remaining" value={guessesRemaining} />
         <Tile header="Correct" value={correct} />
         <Tile header="Wrong" value={wrong} />
-        <Tile header="Time" value={timerSeconds} />
+        <Tile header="Timer" value={formatTime(timerSeconds)} />
         <button onClick={pause}>Pause</button>
       </div>
 

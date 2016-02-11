@@ -51,7 +51,7 @@ const initialState = {
   attempted: [],
   gameState: START,
   timerState: STOPPED,
-  timerSeconds: 59,
+  timerSeconds: 90,
 };
 
 // selected :: Array (Array Matchable) -> Array [Number, Number]

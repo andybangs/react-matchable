@@ -2,9 +2,10 @@ import React, { PropTypes } from 'react';
 import cL from 'classnames';
 import Tile from './Tile';
 import { RESET } from '../constants/quiz';
+import formatTime from '../util/formatTime';
 
 const End = (props) => {
-  const { columns, correct, quizLength, reset } = props;
+  const { columns, correct, timerSeconds, quizLength, reset } = props;
 
   function retry() {
     reset(RESET);
@@ -43,6 +44,7 @@ const End = (props) => {
       <div style={styles.top}>
         <Tile header="You got" value={calcScore(correct, quizLength)} />
         <Tile header="Score" value={`${correct}/${quizLength}`} />
+        <Tile header="Timer" value={formatTime(timerSeconds)} />
         <button onClick={retry}>Try Again</button>
       </div>
 
@@ -97,6 +99,7 @@ const styles = {
 End.propTypes = {
   columns: PropTypes.array.isRequired,
   correct: PropTypes.number.isRequired,
+  timerSeconds: PropTypes.number.isRequired,
   quizLength: PropTypes.number.isRequired,
   reset: PropTypes.func.isRequired,
 };

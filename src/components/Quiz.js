@@ -48,6 +48,7 @@ const Quiz = (props) => {
         <End
           columns={quiz.columns}
           correct={quiz.correct}
+          timerSeconds={quiz.timerSeconds}
           quizLength={quiz.columns[0].length}
           reset={actions.reset}
         />
