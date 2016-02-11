@@ -3,7 +3,7 @@ import Tile from './Tile';
 import { PLAYING, END } from '../constants/gameStates';
 
 const Paused = (props) => {
-  const { guessesRemaining, correct, wrong, setGameState } = props;
+  const { guessesRemaining, correct, wrong, timerSeconds, setGameState } = props;
 
   function play() {
     setGameState(PLAYING);
@@ -20,6 +20,7 @@ const Paused = (props) => {
         <Tile header="Remaining" value={guessesRemaining} />
         <Tile header="Correct" value={correct} />
         <Tile header="Wrong" value={wrong} />
+        <Tile header="Time" value={timerSeconds} />
         <button onClick={play}>Resume</button>
       </div>
 
@@ -62,6 +63,7 @@ Paused.propTypes = {
   guessesRemaining: PropTypes.number.isRequired,
   correct: PropTypes.number.isRequired,
   wrong: PropTypes.number.isRequired,
+  timerSeconds: PropTypes.number.isRequired,
   setGameState: PropTypes.func.isRequired,
 };
 

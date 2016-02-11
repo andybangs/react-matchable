@@ -1,9 +1,15 @@
-import { SET_GAME_STATE, RESET, SELECT_ITEM } from '../constants/quiz';
+import { SET_GAME_STATE, TICK, RESET, SELECT_ITEM } from '../constants/quiz';
 
 export function setGameState(state) {
   return {
     type: SET_GAME_STATE,
     gameState: state,
+  };
+}
+
+export function tick() {
+  return {
+    type: TICK,
   };
 }
 

@@ -11,6 +11,7 @@ const Playing = (props) => {
     correct,
     wrong,
     attempted,
+    timerSeconds,
     setGameState,
     selectItem,
   } = props;
@@ -23,7 +24,7 @@ const Playing = (props) => {
     selectItem(i.mid, i.id);
   }
 
-  // buildItem : Item -> Bool -> [mid, id] -> Func -> JSX
+  // buildItem :: Item -> Bool -> [mid :: Number, id :: Number] -> Func -> JSX
   function buildItem(item, isMatched, attemptedItem, handleItemClick) {
     function handleClick() {
       handleItemClick(item);
@@ -41,7 +42,7 @@ const Playing = (props) => {
     );
   }
 
-  // buildColumn : Array Matchable -> [mid : Number, id : Number] -> JSX
+  // buildColumn :: Array Matchable -> [mid :: Number, id :: Number] -> JSX
   function buildColumn(columnArr, attemptedItem) {
     const items = columnArr.map(m => buildItem(m.items[0], m.matched, attemptedItem, select));
 
@@ -61,6 +62,7 @@ const Playing = (props) => {
         <Tile header="Remaining" value={guessesRemaining} />
         <Tile header="Correct" value={correct} />
         <Tile header="Wrong" value={wrong} />
+        <Tile header="Time" value={timerSeconds} />
         <button onClick={pause}>Pause</button>
       </div>
 
@@ -118,6 +120,7 @@ Playing.propTypes = {
   correct: PropTypes.number.isRequired,
   wrong: PropTypes.number.isRequired,
   attempted: PropTypes.array.isRequired,
+  timerSeconds: PropTypes.number.isRequired,
   setGameState: PropTypes.func.isRequired,
   selectItem: PropTypes.func.isRequired,
 };

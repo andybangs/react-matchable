@@ -30,11 +30,13 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
+    "babel-polyfill": "^6.5.0",
     "classnames": "^2.2.3",
     "lodash-es": "^4.2.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.2.0",
-    "redux": "^3.2.0"
+    "redux": "^3.2.0",
+    "redux-saga": "^0.7.0"
   }
 }

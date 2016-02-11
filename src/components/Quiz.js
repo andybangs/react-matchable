@@ -26,7 +26,7 @@ const Quiz = (props) => {
           correct={quiz.correct}
           wrong={quiz.wrong}
           attempted={quiz.attempted}
-          gameState={quiz.gameState}
+          timerSeconds={quiz.timerSeconds}
           setGameState={actions.setGameState}
           selectItem={actions.selectItem}
         />
@@ -38,6 +38,7 @@ const Quiz = (props) => {
           guessesRemaining={quiz.guessesRemaining}
           correct={quiz.correct}
           wrong={quiz.wrong}
+          timerSeconds={quiz.timerSeconds}
           setGameState={actions.setGameState}
         />
       );
