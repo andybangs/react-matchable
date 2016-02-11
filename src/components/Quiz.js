@@ -46,6 +46,7 @@ const Quiz = (props) => {
     case END:
       return (
         <End
+          columns={quiz.columns}
           correct={quiz.correct}
           quizLength={quiz.columns[0].length}
           reset={actions.reset}

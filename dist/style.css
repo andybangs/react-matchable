@@ -77,3 +77,7 @@ li {
     -moz-animation-iteration-count: 1;
     -moz-animation-timing-function: linear;
 }
+
+.wrong {
+  background-color: #f58471;
+}
