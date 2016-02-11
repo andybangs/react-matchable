@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import { flatten } from 'lodash';
-import cL from 'classnames';
+import Radium from 'radium';
 import Tile from './Tile';
+import { flatten } from 'lodash';
 import { PAUSED } from '../constants/gameStates';
 import formatTime from '../util/formatTime';
 
@@ -27,6 +27,10 @@ const Playing = (props) => {
 
   // buildItem :: Item -> Bool -> [mid :: Number, id :: Number] -> Func -> JSX
   function buildItem(item, isMatched, attemptedItem, handleItemClick) {
+    const selected = item.selected ? 'selected' : '';
+    const matched = isMatched ? 'matched' : '';
+    const missed = attemptedItem[0] === item.mid ? 'missed' : '';
+
     function handleClick() {
       handleItemClick(item);
     }
@@ -34,11 +38,12 @@ const Playing = (props) => {
     return (
       <li key={`${item.mid}-${item.id}`}
         onClick={handleClick}
-        className={cL(
-          { 'selected': item.selected },
-          { 'matched': isMatched },
-          { 'attempted': attemptedItem[0] === item.mid }
-        )}
+        style={[
+          styles.li,
+          styles[selected],
+          styles[matched],
+          styles[missed],
+        ]}
       >{item.value}</li>
     );
   }
@@ -79,6 +84,20 @@ const Playing = (props) => {
   );
 };
 
+const matchedKeyframes = Radium.keyframes({
+  '0%': { backgroundColor: '#fff' },
+  '22%': { backgroundColor: '#9ff5a9' },
+  '77%': { backgroundColor: '#9ff5a9' },
+  '100%': { backgroundColor: '#9ff5a9' },
+}, 'matched');
+
+const missedKeyframes = Radium.keyframes({
+  '0%': { backgroundColor: '#f58471' },
+  '22%': { backgroundColor: '#f58471' },
+  '77%': { backgroundColor: '#f58471' },
+  '100%': { backgroundColor: '#fff' },
+}, 'missed');
+
 const styles = {
   container: {
     display: 'flex',
@@ -113,6 +132,32 @@ const styles = {
     alignContent: 'flex-start',
     justifyContent: 'center',
   },
+  li: {
+    backgroundColor: '#fff',
+    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+    margin: 5,
+    padding: 7,
+    borderRadius: 4,
+    textAlign: 'center',
+    fontSize: '0.7em',
+    cursor: 'pointer',
+  },
+  selected: {
+    backgroundColor: '#fcffbd',
+  },
+  matched: {
+    backgroundColor: '#9ff5a9',
+    animationName: matchedKeyframes,
+    animationDuration: '300ms',
+    animationIterationCount: 1,
+    animationTimingFunction: 'linear',
+  },
+  missed: {
+    animationName: missedKeyframes,
+    animationDuration: '300ms',
+    animationIterationCount: 1,
+    animationTimingFunction: 'linear',
+  },
 };
 
 Playing.propTypes = {
@@ -126,4 +171,4 @@ Playing.propTypes = {
   selectItem: PropTypes.func.isRequired,
 };
 
-export default Playing;
+export default Radium(Playing);

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import cL from 'classnames';
+import Radium from 'radium';
 import Tile from './Tile';
 import { RESET } from '../constants/quiz';
 import formatTime from '../util/formatTime';
@@ -18,12 +18,13 @@ const End = (props) => {
 
   // buildItem :: Item -> Bool -> JSX
   function buildItem(item, isMatched) {
+    const result = isMatched ? 'matched' : 'missed';
     return (
       <li key={`${item.mid}-${item.id}`}
-        className={cL(
-          { 'wrong': !isMatched },
-          { 'matched': isMatched }
-        )}
+        style={[
+          styles.li,
+          styles[result],
+        ]}
       >{item.value}</li>
     );
   }
@@ -94,6 +95,22 @@ const styles = {
     alignContent: 'flex-start',
     justifyContent: 'center',
   },
+  li: {
+    backgroundColor: '#fff',
+    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+    margin: 5,
+    padding: 7,
+    borderRadius: 4,
+    textAlign: 'center',
+    fontSize: '0.7em',
+    cursor: 'pointer',
+  },
+  matched: {
+    backgroundColor: '#9ff5a9',
+  },
+  missed: {
+    backgroundColor: '#f58471',
+  },
 };
 
 End.propTypes = {
@@ -104,4 +121,4 @@ End.propTypes = {
   reset: PropTypes.func.isRequired,
 };
 
-export default End;
+export default Radium(End);
