@@ -1,5 +1,3 @@
-// http://jaysoo.ca/2016/01/03/managing-processes-in-redux-using-sagas/
-
 import { call, put } from 'redux-saga';
 import { STOPPED, RUNNING } from '../constants/timerStates';
 import { tick } from '../actions/quiz';
