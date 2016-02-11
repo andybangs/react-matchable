@@ -9,7 +9,7 @@ const End = (props) => {
     reset(RESET);
   }
 
-  // calcScore : Number -> Number -> String
+  // calcScore :: Number -> Number -> String
   function calcScore(numCorrect, numTotal) {
     return `${Math.round(Math.round((numCorrect / numTotal) * 1000) / 10)}%`;
   }

@@ -1,6 +1,7 @@
 import { flatMap, flatten, shuffle } from 'lodash';
-import { START, END } from '../constants/gameStates';
-import { SET_GAME_STATE, RESET, SELECT_ITEM } from '../constants/quiz';
+import { START, PLAYING, END } from '../constants/gameStates';
+import { STOPPED, RUNNING } from '../constants/timerStates';
+import { SET_GAME_STATE, TICK, RESET, SELECT_ITEM } from '../constants/quiz';
 
 function item(mid, id, value) {
   return {
@@ -44,14 +45,16 @@ const initialState = {
   title: 'Famous Literary Novels',
   description: 'Match the title to the author',
   columns: [leftColumn, rightColumn],
-  guessesRemaining: 12,
+  guessesRemaining: leftColumn.length,
   correct: 0,
   wrong: 0,
   attempted: [],
   gameState: START,
+  timerState: STOPPED,
+  timerSeconds: 59,
 };
 
-// selected : Array (Array Matchable) -> Array [Number, Number]
+// selected :: Array (Array Matchable) -> Array [Number, Number]
 function selected(columns) {
   return flatten(columns.map(column =>
     flatMap(column, m => m.items)
@@ -63,13 +66,20 @@ function selected(columns) {
 export default function quiz(state = initialState, action) {
   switch (action.type) {
     case SET_GAME_STATE:
-      return { ...state, gameState: action.gameState };
+      return action.gameState === PLAYING ?
+        { ...state, gameState: action.gameState, timerState: RUNNING } :
+        { ...state, gameState: action.gameState, timerState: STOPPED };
+
+    case TICK:
+      return state.timerSeconds > 0 ?
+        { ...state, timerSeconds: state.timerSeconds - 1 } :
+        { ...state, gameState: END };
 
     case RESET:
       return initialState;
 
     case SELECT_ITEM:
-      // alreadyMatched : Bool
+      // alreadyMatched :: Bool
       const alreadyMatched = state.columns[0]
         .filter(m => m.id === action.mid && m.matched)
         .length === 1;
@@ -77,7 +87,7 @@ export default function quiz(state = initialState, action) {
       // If the item's matchable is already matched, take no action and return state
       if (alreadyMatched) return state;
 
-      // newColumns : Array (Array Matchable)
+      // newColumns :: Array (Array Matchable)
       const newColumns = state.columns
         .map(column => column.map(m => {
           if (m.id === action.mid) {
@@ -91,7 +101,7 @@ export default function quiz(state = initialState, action) {
           return m;
         }));
 
-      // selectedItems : Array [mid, id]
+      // selectedItems :: Array [mid, id]
       const selectedItems = selected(newColumns);
 
       // If 0 or 1 items are currently selected, return state with the toggled item
@@ -101,10 +111,10 @@ export default function quiz(state = initialState, action) {
 
       // If the previously selected item is from the same column (it has the same id)...
       if (selectedItems[0][1] === selectedItems[1][1]) {
-        // selectedStr : Array String
+        // selectedStr :: Array String
         const selectedStr = selectedItems.map(arr => arr.toString());
 
-        // newColumns2 : Array (Array Matchable)
+        // newColumns2 :: Array (Array Matchable)
         const newColumns2 = newColumns
           .map(column => column.map(m => {
             // ...check to make sure it's not the most recently selected item,
