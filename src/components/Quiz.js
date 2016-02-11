@@ -21,6 +21,7 @@ const Quiz = (props) => {
     case PLAYING:
       return (
         <Playing
+          itemIds={quiz.itemIds}
           columns={quiz.columns}
           guessesRemaining={quiz.guessesRemaining}
           correct={quiz.correct}
@@ -46,6 +47,7 @@ const Quiz = (props) => {
     case END:
       return (
         <End
+          itemIds={quiz.itemIds}
           columns={quiz.columns}
           correct={quiz.correct}
           timerSeconds={quiz.timerSeconds}

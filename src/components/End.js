@@ -5,7 +5,14 @@ import { RESET } from '../constants/quiz';
 import formatTime from '../util/formatTime';
 
 const End = (props) => {
-  const { columns, correct, timerSeconds, quizLength, reset } = props;
+  const {
+    itemIds,
+    columns,
+    correct,
+    timerSeconds,
+    quizLength,
+    reset,
+  } = props;
 
   function retry() {
     reset(RESET);
@@ -29,15 +36,15 @@ const End = (props) => {
     );
   }
 
-  // buildColumn :: Array Matchable -> JSX
-  function buildColumn(columnArr) {
+  // buildColumn :: Array Matchable -> Number -> JSX
+  function buildColumn(columnArr, columnKey) {
     const items = columnArr.map(m => buildItem(m.items[0], m.matched));
 
-    return <ul style={styles.ul}>{items}</ul>;
+    return <ul key={columnKey} style={styles.ul}>{items}</ul>;
   }
 
-  const leftColumn = buildColumn(columns[0]);
-  const rightColumn = buildColumn(columns[1]);
+  // columns :: Array JSX
+  const columnsArr = itemIds.map(id => buildColumn(columns[id], id));
 
   return (
     <div style={styles.container}>
@@ -50,11 +57,7 @@ const End = (props) => {
       </div>
 
       <div style={styles.bottom}>
-        <div style={styles.divider}></div>
-        {leftColumn}
-        <div style={styles.divider}></div>
-        {rightColumn}
-        <div style={styles.divider}></div>
+        {columnsArr}
       </div>
 
     </div>
@@ -80,11 +83,8 @@ const styles = {
     flexFlow: 'row',
     alignItems: 'center',
   },
-  divider: {
-    flex: 1,
-  },
   ul: {
-    flex: 7,
+    flex: 1,
     height: '90%',
     padding: 0,
     margin: 0,
@@ -114,6 +114,7 @@ const styles = {
 };
 
 End.propTypes = {
+  itemIds: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
   correct: PropTypes.number.isRequired,
   timerSeconds: PropTypes.number.isRequired,

@@ -5,9 +5,10 @@
     "generators": true
   },
   "rules": {
-    "no-use-before-define": 0,                    // component styles object defined after component
-    "quote-props": 0,                             // conditional classes with classnames
-    "max-len": 1,                                 // warn if line-length exceeds 100
+    "no-use-before-define": 0,                              // styles defined after component
+    "max-len": 0,                                           // don't warn if line-length exceeds 100
+    "new-cap": 0,                                           // accommodate Radium
+    "no-constant-condition": 0,                             // redux-saga
     "generator-star-spacing": [2, {"before": false, "after": true}]
   }
 }

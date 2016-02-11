@@ -7,6 +7,7 @@ import formatTime from '../util/formatTime';
 
 const Playing = (props) => {
   const {
+    itemIds,
     columns,
     guessesRemaining,
     correct,
@@ -48,18 +49,19 @@ const Playing = (props) => {
     );
   }
 
-  // buildColumn :: Array Matchable -> [mid :: Number, id :: Number] -> JSX
-  function buildColumn(columnArr, attemptedItem) {
+  // buildColumn :: Array Matchable -> Number -> [mid :: Number, id :: Number] -> JSX
+  function buildColumn(columnArr, columnKey, attemptedItem) {
     const items = columnArr.map(m => buildItem(m.items[0], m.matched, attemptedItem, select));
 
-    return <ul style={styles.ul}>{items}</ul>;
+    return <ul key={columnKey} style={styles.ul}>{items}</ul>;
   }
 
-  const leftAttempt = attempted.length > 0 ? flatten(attempted.filter(arr => arr[1] === 0)) : [];
-  const rightAttempt = attempted.length > 0 ? flatten(attempted.filter(arr => arr[1] === 1)) : [];
-
-  const leftColumn = buildColumn(columns[0], leftAttempt);
-  const rightColumn = buildColumn(columns[1], rightAttempt);
+  // columns :: Array JSX
+  const columnsArr = itemIds.map(id => {
+    // attempt :: [mid, id] || []
+    const attempt = attempted.length > 0 ? flatten(attempted.filter(arr => arr[1] === id)) : [];
+    return buildColumn(columns[id], id, attempt);
+  });
 
   return (
     <div style={styles.container}>
@@ -73,11 +75,7 @@ const Playing = (props) => {
       </div>
 
       <div style={styles.bottom}>
-        <div style={styles.divider}></div>
-        {leftColumn}
-        <div style={styles.divider}></div>
-        {rightColumn}
-        <div style={styles.divider}></div>
+        {columnsArr}
       </div>
 
     </div>
@@ -117,11 +115,8 @@ const styles = {
     flexFlow: 'row',
     alignItems: 'center',
   },
-  divider: {
-    flex: 1,
-  },
   ul: {
-    flex: 7,
+    flex: 1,
     height: '90%',
     padding: 0,
     margin: 0,
@@ -130,6 +125,7 @@ const styles = {
     flexFlow: 'row',
     flexWrap: 'wrap',
     alignContent: 'flex-start',
+    alignItems: 'flex-start',
     justifyContent: 'center',
   },
   li: {
@@ -161,6 +157,7 @@ const styles = {
 };
 
 Playing.propTypes = {
+  itemIds: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
   guessesRemaining: PropTypes.number.isRequired,
   correct: PropTypes.number.isRequired,
