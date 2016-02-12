@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack"
+    "start": "webpack-dev-server --progress --config webpack.dev.config.js",
+    "build": "webpack -p --progress --config webpack.prod.config.js"
   },
   "author": "Andy Bangs <andrew.yuta@gmail.com>",
   "license": "MIT",

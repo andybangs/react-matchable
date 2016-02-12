@@ -19,7 +19,7 @@ const styles = {
     justifyContent: 'center',
   },
   top: {
-    fontSize: '0.7em',
+    fontSize: '0.8em',
   },
   bottom: {
     fontSize: '1.5em',

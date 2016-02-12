@@ -63,7 +63,7 @@ const Playing = (props) => {
     <div style={styles.container}>
 
       <div style={styles.top}>
-        <Tile header="Guesses Remaining" value={guessesRemaining} />
+        <Tile header="Guesses" value={guessesRemaining} />
         <Tile header="Correct" value={correct} />
         <Tile header="Wrong" value={wrong} />
         <Tile header="Timer" value={formatTime(timerSeconds)} />
@@ -131,7 +131,6 @@ const styles = {
     padding: 7,
     borderRadius: 4,
     textAlign: 'center',
-    fontSize: '0.7em',
     cursor: 'pointer',
   },
   selected: {

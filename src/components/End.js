@@ -111,7 +111,6 @@ const styles = {
     padding: 7,
     borderRadius: 4,
     textAlign: 'center',
-    fontSize: '0.7em',
     cursor: 'pointer',
   },
   matched: {
