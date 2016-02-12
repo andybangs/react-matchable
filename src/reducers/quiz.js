@@ -1,7 +1,7 @@
 import { flatMap, flatten, shuffle, take, uniq } from 'lodash';
 import { START, PLAYING, END } from '../constants/gameStates';
 import { STOPPED, RUNNING } from '../constants/timerStates';
-import { SET_GAME_STATE, TICK, RESET, SELECT_ITEM } from '../constants/quiz';
+import { SET_GAME_STATE, TICK, SELECT_ITEM, TOGGLE_FOCUS, RESET } from '../constants/quiz';
 
 /* -- TYPE ALIASES ---------------------------------------------------------------------------------
 type alias Item = {
@@ -9,6 +9,7 @@ type alias Item = {
   id :: Number,
   value :: String,
   selected :: Bool,
+  focused :: Bool,
 }
 
 type alias Matchable = {
@@ -25,6 +26,7 @@ function item(mid, id, value) {
     id,
     value,
     selected: false,
+    focused: false,
   };
 }
 
@@ -115,9 +117,6 @@ export default function quiz(state = initialState, action) {
       return state.timerSeconds > 0 ?
         { ...state, timerSeconds: state.timerSeconds - 1 } :
         { ...state, gameState: END };
-
-    case RESET:
-      return initialState;
 
     case SELECT_ITEM:
       // alreadyMatched :: Bool
@@ -243,6 +242,21 @@ export default function quiz(state = initialState, action) {
       }
 
       return newState;
+
+    case TOGGLE_FOCUS:
+      const toggledColumns = state.columns
+        .map(column => column.map(m => {
+          if (m.id === action.mid) {
+            return { ...m, items: m.items.map(i => ({ ...i, focused: true })) };
+          }
+          return { ...m, items: m.items.map(i => ({ ...i, focused: false })) };
+        })
+      );
+
+      return { ...state, columns: toggledColumns };
+
+    case RESET:
+      return initialState;
 
     default:
       return state;

@@ -55,9 +55,6 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  state: {
-    color: '#ed6868',
-  },
 };
 
 Paused.propTypes = {

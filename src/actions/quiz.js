@@ -1,4 +1,4 @@
-import { SET_GAME_STATE, TICK, RESET, SELECT_ITEM } from '../constants/quiz';
+import { SET_GAME_STATE, TICK, RESET, SELECT_ITEM, TOGGLE_FOCUS } from '../constants/quiz';
 
 export function setGameState(state) {
   return {
@@ -13,16 +13,23 @@ export function tick() {
   };
 }
 
-export function reset() {
-  return {
-    type: RESET,
-  };
-}
-
 export function selectItem(mid, id) {
   return {
     type: SELECT_ITEM,
     mid,
     id,
+  };
+}
+
+export function toggleFocus(mid) {
+  return {
+    type: TOGGLE_FOCUS,
+    mid,
+  };
+}
+
+export function reset() {
+  return {
+    type: RESET,
   };
 }

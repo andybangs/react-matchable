@@ -22,18 +22,14 @@ const Playing = (props) => {
     setGameState(PAUSED);
   }
 
-  function select(i) {
-    selectItem(i.mid, i.id);
-  }
-
-  // buildItem :: Item -> Bool -> [mid :: Number, id :: Number] -> Func -> JSX
-  function buildItem(item, isMatched, attemptedItem, handleItemClick) {
+  // buildItem :: Item -> Bool -> [mid :: Number, id :: Number] -> JSX
+  function buildItem(item, isMatched, attemptedItem) {
     const selected = item.selected ? 'selected' : '';
     const matched = isMatched ? 'matched' : '';
     const missed = attemptedItem[0] === item.mid ? 'missed' : '';
 
     function handleClick() {
-      handleItemClick(item);
+      selectItem(item.mid, item.id);
     }
 
     return (
@@ -51,7 +47,7 @@ const Playing = (props) => {
 
   // buildColumn :: Array Matchable -> Number -> [mid :: Number, id :: Number] -> JSX
   function buildColumn(columnArr, columnKey, attemptedItem) {
-    const items = columnArr.map(m => buildItem(m.items[0], m.matched, attemptedItem, select));
+    const items = columnArr.map(m => buildItem(m.items[0], m.matched, attemptedItem));
 
     return <ul key={columnKey} style={styles.ul}>{items}</ul>;
   }

@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import Radium from 'radium';
 import Tile from './Tile';
-import { RESET } from '../constants/quiz';
 import formatTime from '../util/formatTime';
 
 const End = (props) => {
@@ -11,26 +10,36 @@ const End = (props) => {
     correct,
     timerSeconds,
     quizLength,
+    toggleFocus,
     reset,
   } = props;
-
-  function retry() {
-    reset(RESET);
-  }
 
   // calcScore :: Number -> Number -> String
   function calcScore(numCorrect, numTotal) {
     return `${Math.round(Math.round((numCorrect / numTotal) * 1000) / 10)}%`;
   }
 
-  // buildItem :: Item -> Bool -> JSX
-  function buildItem(item, isMatched) {
+  // buildItem :: Item -> Bool -> Bool -> JSX
+  function buildItem(item, isMatched, isFocused) {
     const result = isMatched ? 'matched' : 'missed';
+    const focused = isFocused ? 'focused' : '';
+
+    function handleOnMouseOver() {
+      toggleFocus(item.mid);
+    }
+
+    function handleOnMouseLeave() {
+      toggleFocus(null);
+    }
+
     return (
       <li key={`${item.mid}-${item.id}`}
+        onMouseEnter={handleOnMouseOver}
+        onMouseLeave={handleOnMouseLeave}
         style={[
           styles.li,
           styles[result],
+          styles[focused],
         ]}
       >{item.value}</li>
     );
@@ -38,7 +47,7 @@ const End = (props) => {
 
   // buildColumn :: Array Matchable -> Number -> JSX
   function buildColumn(columnArr, columnKey) {
-    const items = columnArr.map(m => buildItem(m.items[0], m.matched));
+    const items = columnArr.map(m => buildItem(m.items[0], m.matched, m.items[0].focused));
 
     return <ul key={columnKey} style={styles.ul}>{items}</ul>;
   }
@@ -53,7 +62,7 @@ const End = (props) => {
         <Tile header="You got" value={calcScore(correct, quizLength)} />
         <Tile header="Score" value={`${correct}/${quizLength}`} />
         <Tile header="Timer" value={formatTime(timerSeconds)} />
-        <button onClick={retry}>Try Again</button>
+        <button onClick={reset}>Try Again</button>
       </div>
 
       <div style={styles.bottom}>
@@ -111,6 +120,9 @@ const styles = {
   missed: {
     backgroundColor: '#f58471',
   },
+  focused: {
+    backgroundColor: '#fcffbd',
+  },
 };
 
 End.propTypes = {
@@ -119,6 +131,7 @@ End.propTypes = {
   correct: PropTypes.number.isRequired,
   timerSeconds: PropTypes.number.isRequired,
   quizLength: PropTypes.number.isRequired,
+  toggleFocus: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
 };
 

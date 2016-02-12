@@ -52,6 +52,7 @@ const Quiz = (props) => {
           correct={quiz.correct}
           timerSeconds={quiz.timerSeconds}
           quizLength={quiz.columns[0].length}
+          toggleFocus={actions.toggleFocus}
           reset={actions.reset}
         />
       );
