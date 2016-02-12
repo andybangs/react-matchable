@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as QuizActions from '../actions/quiz';
-import Header from '../components/Header';
-import Quiz from '../components/Quiz';
+import AppHeader from '../components/AppHeader';
+import AppRouter from '../components/AppRouter';
 
 const App = (props) => {
   const { quiz, actions } = props;
@@ -11,10 +11,10 @@ const App = (props) => {
   return (
     <div style={styles.container}>
       <div style={styles.header}>
-        <Header title="Matchable Quiz" />
+        <AppHeader title="Matchable Quiz" />
       </div>
       <div style={styles.body}>
-        <Quiz quiz={quiz} actions={actions} />
+        <AppRouter quiz={quiz} actions={actions} />
       </div>
     </div>
   );

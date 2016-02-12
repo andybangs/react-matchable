@@ -5,7 +5,7 @@ import Playing from './Playing';
 import Paused from './Paused';
 import End from './End';
 
-const Quiz = (props) => {
+const AppRouter = (props) => {
   const { quiz, actions } = props;
 
   switch (quiz.gameState) {
@@ -21,6 +21,7 @@ const Quiz = (props) => {
     case PLAYING:
       return (
         <Playing
+          gameState={quiz.gameState}
           itemIds={quiz.itemIds}
           columns={quiz.columns}
           guessesRemaining={quiz.guessesRemaining}
@@ -47,11 +48,11 @@ const Quiz = (props) => {
     case END:
       return (
         <End
+          gameState={quiz.gameState}
           itemIds={quiz.itemIds}
           columns={quiz.columns}
           correct={quiz.correct}
           timerSeconds={quiz.timerSeconds}
-          quizLength={quiz.columns[0].length}
           toggleFocus={actions.toggleFocus}
           reset={actions.reset}
         />
@@ -68,9 +69,9 @@ const Quiz = (props) => {
   }
 };
 
-Quiz.propTypes = {
+AppRouter.propTypes = {
   quiz: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
 };
 
-export default Quiz;
+export default AppRouter;

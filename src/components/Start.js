@@ -11,12 +11,12 @@ const Start = (props) => {
   return (
     <div style={styles.container}>
 
-      <div style={styles.top}>
+      <div style={styles.header}>
         <h2>{title}</h2>
         <h3>{description}</h3>
       </div>
 
-      <div style={styles.bottom}>
+      <div style={styles.body}>
         <button onClick={play}>Play</button>
       </div>
 
@@ -30,14 +30,14 @@ const styles = {
     flexFlow: 'column',
     alignItems: 'stretch',
   },
-  top: {
+  header: {
     height: '50%',
     display: 'flex',
     flexFlow: 'column',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  bottom: {
+  body: {
     height: '50%',
     display: 'flex',
     flexFlow: 'column',

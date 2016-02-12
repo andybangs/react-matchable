@@ -5,8 +5,8 @@ const Tile = (props) => {
 
   return (
     <div style={styles.container}>
-      <span style={styles.top}>{header}</span>
-      <span style={styles.bottom}>{value}</span>
+      <span style={styles.header}>{header}</span>
+      <span style={styles.body}>{value}</span>
     </div>
   );
 };
@@ -18,10 +18,10 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  top: {
+  header: {
     fontSize: '0.8em',
   },
-  bottom: {
+  body: {
     fontSize: '1.5em',
   },
 };

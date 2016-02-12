@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Tile from './Tile';
+import Timer from './Timer';
 import { PLAYING, END } from '../constants/gameStates';
-import formatTime from '../util/formatTime';
 
 const Paused = (props) => {
   const { guessesRemaining, correct, wrong, timerSeconds, setGameState } = props;
@@ -17,15 +17,15 @@ const Paused = (props) => {
   return (
     <div style={styles.container}>
 
-      <div style={styles.top}>
+      <div style={styles.header}>
         <Tile header="Guesses" value={guessesRemaining} />
         <Tile header="Correct" value={correct} />
         <Tile header="Wrong" value={wrong} />
-        <Tile header="Timer" value={formatTime(timerSeconds)} />
+        <Timer timerSeconds={timerSeconds} />
         <button onClick={play}>Resume</button>
       </div>
 
-      <div style={styles.bottom}>
+      <div style={styles.body}>
         <h3>Phew! Take a breath.</h3>
         <button onClick={quit}>I'm over it!</button>
       </div>
@@ -41,14 +41,14 @@ const styles = {
     alignItems: 'stretch',
     justifyContent: 'center',
   },
-  top: {
+  header: {
     height: '15%',
     display: 'flex',
     flexFlow: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
   },
-  bottom: {
+  body: {
     height: '85%',
     display: 'flex',
     flexFlow: 'column',

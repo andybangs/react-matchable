@@ -7,6 +7,7 @@
   "rules": {
     "no-use-before-define": 0,                              // styles defined after component
     "max-len": 0,                                           // don't warn if line-length exceeds 100
+    "no-console": 0,                                        // allow console
     "new-cap": 0,                                           // accommodate Radium
     "no-constant-condition": 0,                             // redux-saga
     "generator-star-spacing": [2, {"before": false, "after": true}]

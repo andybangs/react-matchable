@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const Header = (props) => {
+const AppHeader = (props) => {
   const { title } = props;
 
   return (
@@ -19,8 +19,8 @@ const styles = {
   },
 };
 
-Header.propTypes = {
+AppHeader.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-export default Header;
+export default AppHeader;
