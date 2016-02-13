@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import Tile from './Tile';
 import formatTime from '../util/formatTime';
+import Tile from './Tile';
 
-const Timer = (props) => <Tile header="Timer" value={formatTime(props.timerSeconds)} />;
+const Timer = ({ timerSeconds }) => <Tile header="Timer" value={formatTime(timerSeconds)} />;
 
 Timer.propTypes = {
   timerSeconds: PropTypes.number.isRequired,

@@ -1,18 +1,13 @@
 import React, { PropTypes } from 'react';
 import Radium from 'radium';
 
-const Button = (props) => {
-  const { clickHandler, children } = props;
-
-  return (
-    <button
-      style={[styles.button]}
-      onClick={clickHandler}
-    >
-      {children}
-    </button>
-  );
-};
+const Button = ({ clickHandler, children }) =>
+  <button
+    style={[styles.button]}
+    onClick={clickHandler}
+  >
+    {children}
+  </button>;
 
 const styles = {
   button: {

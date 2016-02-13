@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Radium from 'radium';
-import { PLAYING, END } from '../constants/gameStates';
 import { flatten, head } from 'lodash';
+import { PLAYING, END } from '../constants/gameStates';
 
 const QuizBody = (props) => {
   const {
@@ -61,7 +61,7 @@ const QuizBody = (props) => {
     );
   }
 
-  // buildColumn :: Array Matchable -> Number -> [mid :: Number, id :: Number] -> JSX
+  // buildColumn :: Array Matchable -> Number -> [Item.mid, Item.id] -> JSX
   function buildColumn(columnArr, columnKey, attemptedItem) {
     switch (gameState) {
       case PLAYING:
@@ -87,7 +87,7 @@ const QuizBody = (props) => {
 
   // columns :: Array JSX
   const columnsArr = itemIds.map(id => {
-    // attempt :: [mid, id] || []
+    // attempt :: [Item.mid, Item.id] || []
     const attempt = attempted && attempted.length > 0 ?
       flatten(attempted.filter(arr => arr[1] === id)) :
       [];

@@ -1,18 +1,24 @@
 import React, { PropTypes } from 'react';
+import { PLAYING, END } from '../constants/gameStates';
 import Tile from './Tile';
 import Timer from './Timer';
 import Button from './Button';
-import { PLAYING, END } from '../constants/gameStates';
 
 const Paused = (props) => {
-  const { guessesRemaining, correct, wrong, timerSeconds, setGameState } = props;
+  const {
+    guessesRemaining,
+    correct,
+    wrong,
+    timerSeconds,
+    setState,
+  } = props;
 
   function play() {
-    setGameState(PLAYING);
+    setState(PLAYING);
   }
 
   function quit() {
-    setGameState(END);
+    setState(END);
   }
 
   return (
@@ -67,7 +73,7 @@ Paused.propTypes = {
   correct: PropTypes.number.isRequired,
   wrong: PropTypes.number.isRequired,
   timerSeconds: PropTypes.number.isRequired,
-  setGameState: PropTypes.func.isRequired,
+  setState: PropTypes.func.isRequired,
 };
 
 export default Paused;

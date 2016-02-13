@@ -14,7 +14,7 @@ const End = (props) => {
     correct,
     timerSeconds,
     toggleFocus,
-    reset,
+    resetState,
   } = props;
 
   const quizLength = head(columns).length;
@@ -26,7 +26,7 @@ const End = (props) => {
         <Tile header="You got" value={calcScore(correct, quizLength)} />
         <Tile header="Score" value={`${correct}/${quizLength}`} />
         <Timer timerSeconds={timerSeconds} />
-        <Button clickHandler={reset}>Try Again</Button>
+        <Button clickHandler={resetState}>Try Again</Button>
       </div>
 
       <div style={styles.body}>
@@ -70,7 +70,7 @@ End.propTypes = {
   correct: PropTypes.number.isRequired,
   timerSeconds: PropTypes.number.isRequired,
   toggleFocus: PropTypes.func.isRequired,
-  reset: PropTypes.func.isRequired,
+  resetState: PropTypes.func.isRequired,
 };
 
 export default End;

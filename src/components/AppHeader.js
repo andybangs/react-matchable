@@ -1,14 +1,9 @@
 import React, { PropTypes } from 'react';
 
-const AppHeader = (props) => {
-  const { title } = props;
-
-  return (
-    <div style={styles.container}>
-      <span style={styles.title}>{title}</span>
-    </div>
-  );
-};
+const AppHeader = ({ title }) =>
+  <div style={styles.container}>
+    <span style={styles.title}>{title}</span>
+  </div>;
 
 const styles = {
   container: {

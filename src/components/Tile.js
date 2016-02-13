@@ -1,15 +1,10 @@
 import React, { PropTypes } from 'react';
 
-const Tile = (props) => {
-  const { header, value } = props;
-
-  return (
-    <div style={styles.container}>
-      <span style={styles.header}>{header}</span>
-      <span style={styles.body}>{value}</span>
-    </div>
-  );
-};
+const Tile = ({ header, value }) =>
+  <div style={styles.container}>
+    <span style={styles.header}>{header}</span>
+    <span style={styles.body}>{value}</span>
+  </div>;
 
 const styles = {
   container: {

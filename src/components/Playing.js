@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
+import { PAUSED } from '../constants/gameStates';
 import Tile from './Tile';
 import Timer from './Timer';
 import Button from './Button';
 import QuizBody from './QuizBody';
-import { PAUSED } from '../constants/gameStates';
 
 const Playing = (props) => {
   const {
@@ -15,12 +15,12 @@ const Playing = (props) => {
     wrong,
     attempted,
     timerSeconds,
-    setGameState,
+    setState,
     selectItem,
   } = props;
 
   function pause() {
-    setGameState(PAUSED);
+    setState(PAUSED);
   }
 
   return (
@@ -78,7 +78,7 @@ Playing.propTypes = {
   wrong: PropTypes.number.isRequired,
   attempted: PropTypes.array.isRequired,
   timerSeconds: PropTypes.number.isRequired,
-  setGameState: PropTypes.func.isRequired,
+  setState: PropTypes.func.isRequired,
   selectItem: PropTypes.func.isRequired,
 };
 

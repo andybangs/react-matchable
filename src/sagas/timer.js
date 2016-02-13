@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga';
 import { STOPPED, RUNNING } from '../constants/timerStates';
-import { tick } from '../actions/quiz';
+import { tickTimer } from '../actions/quiz';
 
 // wait :: Number -> Promise
 const wait = ms => (
@@ -19,7 +19,7 @@ export default function* runTimer(getState) {
       // Check if the timer is still running.
       // If so, then dispatch a TICK.
       if (getState().quiz.timerState === RUNNING) {
-        yield put(tick());
+        yield put(tickTimer());
         // Otherwise, go idle until user starts the timer again.
       } else {
         break;

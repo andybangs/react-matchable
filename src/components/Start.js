@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
-import Button from './Button';
 import { PLAYING } from '../constants/gameStates';
+import Button from './Button';
 
 const Start = (props) => {
-  const { title, description, setGameState } = props;
+  const { title, description, setState } = props;
 
   function play() {
-    setGameState(PLAYING);
+    setState(PLAYING);
   }
 
   return (
@@ -58,7 +58,7 @@ const styles = {
 Start.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  setGameState: PropTypes.func.isRequired,
+  setState: PropTypes.func.isRequired,
 };
 
 export default Start;
