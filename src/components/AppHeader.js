@@ -5,7 +5,7 @@ const AppHeader = (props) => {
 
   return (
     <div style={styles.container}>
-      <h1>{title}</h1>
+      <span style={styles.title}>{title}</span>
     </div>
   );
 };
@@ -16,6 +16,10 @@ const styles = {
     flexFlow: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  title: {
+    fontSize: '1.6em',
+    fontWeight: '700',
   },
 };
 

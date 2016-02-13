@@ -3,6 +3,7 @@ import { head } from 'lodash';
 import calcScore from '../util/calcScore';
 import Tile from './Tile';
 import Timer from './Timer';
+import Button from './Button';
 import QuizBody from './QuizBody';
 
 const End = (props) => {
@@ -25,7 +26,7 @@ const End = (props) => {
         <Tile header="You got" value={calcScore(correct, quizLength)} />
         <Tile header="Score" value={`${correct}/${quizLength}`} />
         <Timer timerSeconds={timerSeconds} />
-        <button onClick={reset}>Try Again</button>
+        <Button clickHandler={reset}>Try Again</Button>
       </div>
 
       <div style={styles.body}>

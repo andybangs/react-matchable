@@ -110,9 +110,9 @@ const matchedKeyframes = Radium.keyframes({
 }, 'matched');
 
 const missedKeyframes = Radium.keyframes({
-  '0%': { backgroundColor: '#f58471' },
-  '22%': { backgroundColor: '#f58471' },
-  '77%': { backgroundColor: '#f58471' },
+  '0%': { backgroundColor: '#ff9684' },
+  '22%': { backgroundColor: '#ff9684' },
+  '77%': { backgroundColor: '#ff9684' },
   '100%': { backgroundColor: '#fff' },
 }, 'missed');
 
@@ -138,17 +138,22 @@ const styles = {
   li: {
     backgroundColor: '#fff',
     boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-    margin: 5,
+    margin: 4,
     padding: 7,
-    borderRadius: 4,
+    borderRadius: 3,
+    fontSize: '0.9em',
     textAlign: 'center',
     cursor: 'pointer',
+    ':active': {
+      boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+    },
   },
   selected: {
     backgroundColor: '#fcffbd',
   },
   matchedAnimation: {
     backgroundColor: '#9ff5a9',
+    boxShadow: '',
     animationName: matchedKeyframes,
     animationDuration: '300ms',
     animationIterationCount: 1,
@@ -164,7 +169,7 @@ const styles = {
     backgroundColor: '#9ff5a9',
   },
   missedColor: {
-    backgroundColor: '#f58471',
+    backgroundColor: '#ff9684',
   },
 };
 

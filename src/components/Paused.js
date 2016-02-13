@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Tile from './Tile';
 import Timer from './Timer';
+import Button from './Button';
 import { PLAYING, END } from '../constants/gameStates';
 
 const Paused = (props) => {
@@ -22,12 +23,12 @@ const Paused = (props) => {
         <Tile header="Correct" value={correct} />
         <Tile header="Wrong" value={wrong} />
         <Timer timerSeconds={timerSeconds} />
-        <button onClick={play}>Resume</button>
+        <Button clickHandler={play}>Resume</Button>
       </div>
 
       <div style={styles.body}>
-        <h3>Phew! Take a breath.</h3>
-        <button onClick={quit}>I'm over it!</button>
+        <span style={styles.message}>Phew! Take a breath.</span>
+        <Button clickHandler={quit}>I'm over it!</Button>
       </div>
 
     </div>
@@ -54,6 +55,10 @@ const styles = {
     flexFlow: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
+  },
+  message: {
+    margin: '25px 0 25px 0',
+    fontWeight: '700',
   },
 };
 
