@@ -4,11 +4,11 @@ import sagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
-  const createStoreWithMiddleware = applyMiddleware(
-    sagaMiddleware(timer)
-  )(createStore);
-
-  const store = createStoreWithMiddleware(rootReducer, initialState);
+  const store = createStore(
+    rootReducer,
+    initialState,
+    applyMiddleware(sagaMiddleware(timer))
+  );
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
