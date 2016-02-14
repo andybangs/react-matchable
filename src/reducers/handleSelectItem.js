@@ -1,6 +1,5 @@
 import { flatMap, flatten, take, uniq } from 'lodash';
 import { END } from '../constants/gameStates';
-import { STOPPED } from '../constants/timerStates';
 
 // selected :: Array (Array Matchable) -> Array [Item.mid, Item.id]
 function selected(columns) {
@@ -103,7 +102,7 @@ export default function handleSelectItem(state, action) {
     };
 
     if (newState.guessesRemaining === 0) {
-      return { ...newState, gameState: END, timerState: STOPPED };
+      return { ...newState, gameState: END };
     }
 
     return newState;
@@ -131,7 +130,7 @@ export default function handleSelectItem(state, action) {
     };
 
     if (newState.guessesRemaining === 0) {
-      return { ...newState, gameState: END, timerState: STOPPED };
+      return { ...newState, gameState: END };
     }
 
     return newState;

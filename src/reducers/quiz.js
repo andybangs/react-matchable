@@ -1,6 +1,5 @@
 import { flatten, shuffle, take } from 'lodash';
-import { START, PLAYING, END } from '../constants/gameStates';
-import { STOPPED, RUNNING } from '../constants/timerStates';
+import { START } from '../constants/gameStates';
 import { SET_STATE, TICK_TIMER, SELECT_ITEM, TOGGLE_FOCUS, RESET_STATE } from '../constants/quiz';
 import handleSelectItem from './handleSelectItem';
 
@@ -93,21 +92,16 @@ const initialState = {
   wrong: 0,
   attempted: [],
   gameState: START,
-  timerState: STOPPED,
   timerSeconds: 90,
 };
 
 export default function quiz(state = initialState, action) {
   switch (action.type) {
     case SET_STATE:
-      return action.gameState === PLAYING ?
-        { ...state, gameState: action.gameState, timerState: RUNNING } :
-        { ...state, gameState: action.gameState, timerState: STOPPED };
+      return { ...state, gameState: action.gameState };
 
     case TICK_TIMER:
-      return state.timerSeconds > 0 ?
-        { ...state, timerSeconds: state.timerSeconds - 1 } :
-        { ...state, gameState: END };
+      return { ...state, timerSeconds: state.timerSeconds - 1 };
 
     case SELECT_ITEM:
       return handleSelectItem(state, action);
