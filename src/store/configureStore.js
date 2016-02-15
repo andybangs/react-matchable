@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore } from 'redux';
-import timer from '../sagas/timer';
+import sagas from '../sagas/sagas';
 import sagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
 
@@ -7,7 +7,7 @@ export default function configureStore(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
-    applyMiddleware(sagaMiddleware(timer))
+    applyMiddleware(sagaMiddleware(...sagas))
   );
 
   if (module.hot) {

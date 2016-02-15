@@ -1,6 +1,7 @@
 import { call, put } from 'redux-saga';
 import { PLAYING, END } from '../constants/gameStates';
-import { tickTimer, setState } from '../actions/quiz';
+import { setState } from '../actions/quiz';
+import { tickTimer } from '../actions/timer';
 
 // wait :: Number -> Promise
 const wait = ms => (
@@ -9,13 +10,13 @@ const wait = ms => (
   })
 );
 
-export default function* timer(getState) {
+function* runTimer(getState) {
   while (getState().quiz.gameState !== PLAYING) {
     while (true) {
       yield call(wait, 1000);
 
       if (getState().quiz.gameState === PLAYING) {
-        if (getState().quiz.timerSeconds > 0) {
+        if (getState().timer.seconds > 0) {
           yield put(tickTimer());
         } else {
           yield put(setState(END));
@@ -26,3 +27,5 @@ export default function* timer(getState) {
     }
   }
 }
+
+export default [runTimer];

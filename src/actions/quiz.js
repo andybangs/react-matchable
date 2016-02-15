@@ -1,15 +1,9 @@
-import { SET_STATE, TICK_TIMER, SELECT_ITEM, TOGGLE_FOCUS, RESET_STATE } from '../constants/quiz';
+import { SET_STATE, SELECT_ITEM, TOGGLE_FOCUS, RESET_STATE } from '../constants/quiz';
 
 export function setState(state) {
   return {
     type: SET_STATE,
     gameState: state,
-  };
-}
-
-export function tickTimer() {
-  return {
-    type: TICK_TIMER,
   };
 }
 

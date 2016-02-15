@@ -5,7 +5,7 @@ import Playing from './Playing';
 import Paused from './Paused';
 import End from './End';
 
-const AppRouter = ({ quiz, actions }) => {
+const AppRouter = ({ quiz, timer, actions }) => {
   switch (quiz.gameState) {
     case START:
       return (
@@ -26,7 +26,7 @@ const AppRouter = ({ quiz, actions }) => {
           correct={quiz.correct}
           wrong={quiz.wrong}
           attempted={quiz.attempted}
-          timerSeconds={quiz.timerSeconds}
+          timerSeconds={timer.seconds}
           setState={actions.setState}
           selectItem={actions.selectItem}
         />
@@ -38,7 +38,7 @@ const AppRouter = ({ quiz, actions }) => {
           guessesRemaining={quiz.guessesRemaining}
           correct={quiz.correct}
           wrong={quiz.wrong}
-          timerSeconds={quiz.timerSeconds}
+          timerSeconds={timer.seconds}
           setState={actions.setState}
         />
       );
@@ -50,7 +50,7 @@ const AppRouter = ({ quiz, actions }) => {
           itemIds={quiz.itemIds}
           columns={quiz.columns}
           correct={quiz.correct}
-          timerSeconds={quiz.timerSeconds}
+          timerSeconds={timer.seconds}
           toggleFocus={actions.toggleFocus}
           resetState={actions.resetState}
         />
@@ -69,6 +69,7 @@ const AppRouter = ({ quiz, actions }) => {
 
 AppRouter.propTypes = {
   quiz: PropTypes.object.isRequired,
+  timer: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
 };
 

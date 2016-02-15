@@ -6,7 +6,7 @@ import AppHeader from '../components/AppHeader';
 import AppRouter from '../components/AppRouter';
 
 const App = (props) => {
-  const { quiz, actions } = props;
+  const { quiz, timer, actions } = props;
 
   return (
     <div style={styles.container}>
@@ -14,7 +14,7 @@ const App = (props) => {
         <AppHeader title="Matchable Quiz" />
       </div>
       <div style={styles.body}>
-        <AppRouter quiz={quiz} actions={actions} />
+        <AppRouter quiz={quiz} timer={timer} actions={actions} />
       </div>
     </div>
   );
@@ -38,12 +38,14 @@ const styles = {
 
 App.propTypes = {
   quiz: PropTypes.object.isRequired,
+  timer: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     quiz: state.quiz,
+    timer: state.timer,
   };
 }
 
