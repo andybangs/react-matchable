@@ -5,7 +5,7 @@ A quiz app inspired by the Clickable Matching Quiz format by <a href="http://www
 #### React Matchable uses
 - <a href="https://facebook.github.io/react/">React</a> for the UI
 - <a href="https://github.com/reactjs/redux">Redux</a> for managing state
-- <a href="https://github.com/yelouafi/redux-saga">Redux Saga</a> for Effects
+- <a href="https://github.com/yelouafi/redux-saga">Redux Saga</a> for managing side effects
 - <a href="http://stack.formidable.com/radium/">Radium</a> for additional inline styling capabilities
 - <a href="https://lodash.com/">Lodash</a> for functional programming helpers
 
@@ -23,9 +23,11 @@ A quiz app inspired by the Clickable Matching Quiz format by <a href="http://www
   
 ## Notes
 
-- Game state is stored in a single object, allowing all React components to be pure and stateless. 
+- All state is stored in a single object, allowing view components to be pure functions
 
-- Quiz data can contain 2 or more columns.
+- Periodic updates to the timer are scheduled using a saga
+
+- Quiz data can contain 2 or more columns
   
 ## License
 
