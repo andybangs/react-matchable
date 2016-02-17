@@ -1,3 +1,4 @@
 node_modules/
 npm-debug.log
-dist/bundle.js
+dist/vendors.bundle.js
+dist/app.bundle.js

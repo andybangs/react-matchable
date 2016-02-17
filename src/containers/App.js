@@ -11,7 +11,7 @@ const App = (props) => {
   return (
     <div style={styles.container}>
       <div style={styles.header}>
-        <AppHeader title="Matchable Quiz" />
+        <AppHeader title="React Matchable" />
       </div>
       <div style={styles.body}>
         <AppRouter quiz={quiz} timer={timer} actions={actions} />
