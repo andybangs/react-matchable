@@ -20,6 +20,7 @@ function deselectItem(i) {
   return { ...i, selected: false };
 }
 
+// handleSelectItem :: QuizState -> Action -> QuizState
 export default function handleSelectItem(state, action) {
   // alreadyMatched :: Bool
   const alreadyMatched = flatten(take(state.columns))

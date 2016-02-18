@@ -3,7 +3,7 @@ import { START } from '../constants/gameStates';
 import { SET_STATE, SELECT_ITEM, TOGGLE_FOCUS, RESET_STATE } from '../constants/quiz';
 import handleSelectItem from './handleSelectItem';
 
-/* -- TYPE ALIASES ---------------------------------------------------------------------------------
+/* -- TYPES ----------------------------------------------------------------------------------------
 type alias Item = {
   mid :: Number,
   id :: Number,
@@ -17,6 +17,22 @@ type alias Matchable = {
   items :: Array Item,
   matched :: Bool,
 }
+
+type alias Data = Array Matchable
+
+type alias QuizState = {
+  title :: String,
+  description :: String,
+  itemIds :: Array Number,
+  columns :: Array (Array Matchable),
+  guessesRemaining :: Number,
+  correct :: Number,
+  wrong :: Number,
+  attempted :: Array [Item.mid, Item.id],
+  gameState :: String
+}
+
+type alias Action = String
 ------------------------------------------------------------------------------------------------- */
 
 // item :: Number -> Number -> String -> Item
@@ -39,6 +55,7 @@ function matchable(id, items) {
   };
 }
 
+// quizData :: Data
 const quizData = [
   matchable(0, [item(0, 0, 'Pride and Prejudice'), item(0, 1, 'Jane Austen')]),
   matchable(1, [item(1, 0, '1984'), item(1, 1, 'George Orwell')]),
@@ -80,6 +97,7 @@ const itemIdsArr = parseItemIds(quizData);
 const columnsArr = parseColumns(quizData, itemIdsArr);
 const numGuesses = flatten(take(columnsArr)).length;
 
+// initialState :: QuizState
 const initialState = {
   title: 'Famous Literary Novels',
   description: 'Match the title to the author',
@@ -94,6 +112,7 @@ const initialState = {
   gameState: START,
 };
 
+// quiz :: QuizState -> Action -> QuizState
 export default function quiz(state = initialState, action) {
   switch (action.type) {
     case SET_STATE:
