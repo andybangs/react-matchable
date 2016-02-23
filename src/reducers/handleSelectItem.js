@@ -3,11 +3,11 @@ import { END } from '../constants/gameStates';
 
 // selected :: Array (Array Matchable) -> Array [Item.mid, Item.id]
 function selected(columns) {
-  return flatten(columns.map(column =>
+  return flatMap(columns, column =>
     flatMap(column, m => m.items)
       .filter(i => i.selected)
       .map(i => [i.mid, i.id])
-  ));
+  );
 }
 
 // toggleItem :: Item -> Item
