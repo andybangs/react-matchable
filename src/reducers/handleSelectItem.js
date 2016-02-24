@@ -130,7 +130,7 @@ export default function handleSelectItem(state, action) {
       attempted: selectedItems,
     };
 
-    if (newState.guessesRemaining === 0) {
+    if (newState.guessesRemaining === 0 || state.suddenDeath) {
       return { ...newState, gameState: END };
     }
 
