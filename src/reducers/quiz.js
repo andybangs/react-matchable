@@ -27,6 +27,7 @@ type alias QuizState = {
   columns :: Array (Array Matchable),
   guessesRemaining :: Number,
   suddenDeath :: Bool,
+  studyMode :: Bool,
   correct :: Number,
   wrong :: Number,
   attempted :: Array [Item.mid, Item.id],
@@ -108,6 +109,7 @@ const initialState = {
   columns: columnsArr,
   guessesRemaining: numGuesses,
   suddenDeath: false,
+  studyMode: true,
   correct: 0,
   wrong: 0,
   attempted: [],
@@ -124,6 +126,8 @@ export default function quiz(state = initialState, action) {
       return handleSelectItem(state, action);
 
     case TOGGLE_FOCUS:
+      if (!state.studyMode) return state;
+
       const updatedColumns = state.columns
         .map(column => column.map(m => {
           if (m.id === action.mid) {
