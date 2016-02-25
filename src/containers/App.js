@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as QuizActions from '../actions/quiz';
+import * as Actions from '../actions';
 import AppHeader from '../components/AppHeader';
 import AppRouter from '../components/AppRouter';
 
@@ -51,7 +51,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(QuizActions, dispatch),
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

@@ -1,26 +1,34 @@
-import { TICK_TIMER, RESET_STATE } from '../constants/timer';
+import {
+  REQUEST_QUIZ,
+  RECEIVE_QUIZ,
+  RESET_STATE,
+  TICK_TIMER,
+} from '../constants';
 
-/* -- TYPES ----------------------------------------------------------------------------------------
-type alias TimerState = {
-  seconds :: Number,
-}
-
-type alias Action = String
-------------------------------------------------------------------------------------------------- */
-
-// initialState :: TimerState
 const initialState = {
-  seconds: 90,
+  seconds: 0,
+  cachedSeconds: 0,
+  isFetching: false,
 };
 
-// timer :: TimerState -> Action -> TimerState
 export default function timer(state = initialState, action) {
   switch (action.type) {
+    case REQUEST_QUIZ:
+      return { ...state, isFetching: true };
+
+    case RECEIVE_QUIZ:
+      return {
+        ...state,
+        seconds: action.data.timerSeconds,
+        cachedSeconds: action.data.timerSeconds,
+        isFetching: false,
+      };
+
     case TICK_TIMER:
       return { ...state, seconds: state.seconds - 1 };
 
     case RESET_STATE:
-      return initialState;
+      return { ...state, seconds: state.cachedSeconds };
 
     default:
       return state;
