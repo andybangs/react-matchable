@@ -1,3 +1,4 @@
+export const FETCH_QUIZ = 'FETCH_QUIZ';
 export const REQUEST_QUIZ = 'REQUEST_QUIZ';
 export const RECEIVE_QUIZ = 'RECEIVE_QUIZ';
 export const SET_STATE = 'SET_STATE';

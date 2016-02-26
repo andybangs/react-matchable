@@ -1,13 +1,13 @@
 import fetch from 'isomorphic-fetch';
-import { put, call } from 'redux-saga/effects';
+import { take, fork, put, call } from 'redux-saga/effects';
 import { requestQuiz, receiveQuiz, setState, tickTimer } from '../actions';
+import { FETCH_QUIZ } from '../constants';
 import { PLAYING, END } from '../constants/gameStates';
 import demoQuiz from './demoQuiz';
 
-// fetchQuizApi :: QuizState
-function fetchQuizApi() {
+function fetchQuizApi(id) {
   // TODO: Replace mock API
-  return fetch('http://localhost:5555/0')
+  return fetch(`http://localhost:5555/${id}`)
     .then(res => {
       if (!res.ok) throw Error(res.statusText);
       return res.json();
@@ -19,17 +19,24 @@ function fetchQuizApi() {
     });
 }
 
+function* fetchQuiz(id) {
+  yield put(requestQuiz());
+  const quiz = yield call(fetchQuizApi, id);
+  yield put(receiveQuiz(quiz));
+}
+
+function* watchFetch() {
+  while (true) {
+    const action = yield take(FETCH_QUIZ);
+    yield fork(fetchQuiz, action.id);
+  }
+}
+
 // wait :: Number -> Promise
 function wait(ms) {
   return new Promise(resolve => {
     setTimeout(() => resolve(), ms);
   });
-}
-
-function* fetchQuiz() {
-  yield put(requestQuiz());
-  const quiz = yield call(fetchQuizApi);
-  yield put(receiveQuiz(quiz));
 }
 
 function* runTimer(getState) {
@@ -50,4 +57,4 @@ function* runTimer(getState) {
   }
 }
 
-export default [fetchQuiz, runTimer];
+export default [watchFetch, runTimer];

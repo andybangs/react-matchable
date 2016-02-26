@@ -1,4 +1,5 @@
 import {
+  FETCH_QUIZ,
   REQUEST_QUIZ,
   RECEIVE_QUIZ,
   SET_STATE,
@@ -7,6 +8,13 @@ import {
   RESET_STATE,
   TICK_TIMER,
 } from '../constants';
+
+export function fetchQuiz(id) {
+  return {
+    type: FETCH_QUIZ,
+    id,
+  };
+}
 
 export function requestQuiz() {
   return {

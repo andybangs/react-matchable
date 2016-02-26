@@ -1,24 +1,30 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
 import AppHeader from '../components/AppHeader';
 import AppRouter from '../components/AppRouter';
 
-const App = (props) => {
-  const { quiz, timer, actions } = props;
+class App extends Component {
+  componentWillMount() {
+    const { actions, routeParams } = this.props;
+    actions.fetchQuiz(routeParams.id);
+  }
 
-  return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <AppHeader title="React Matchable" />
+  render() {
+    const { quiz, timer, actions } = this.props;
+    return (
+      <div style={styles.container}>
+        <div style={styles.header}>
+          <AppHeader title="React Matchable" />
+        </div>
+        <div style={styles.body}>
+          <AppRouter quiz={quiz} timer={timer} actions={actions} />
+        </div>
       </div>
-      <div style={styles.body}>
-        <AppRouter quiz={quiz} timer={timer} actions={actions} />
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const styles = {
   container: {
@@ -40,6 +46,7 @@ App.propTypes = {
   quiz: PropTypes.object.isRequired,
   timer: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
+  routeParams: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {

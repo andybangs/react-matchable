@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
 const AppHeader = ({ title }) =>
   <div style={styles.container}>
-    <span style={styles.title}>{title}</span>
+    <h1><Link to="/" style={styles.link}>{title}</Link></h1>
   </div>;
 
 const styles = {
@@ -12,9 +13,9 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: '1.6em',
-    fontWeight: '700',
+  link: {
+    textDecoration: 'none',
+    color: '#665e5e',
   },
 };
 
