@@ -3,7 +3,7 @@ import { take, fork, put, call } from 'redux-saga/effects';
 import { requestQuiz, receiveQuiz, setState, tickTimer } from '../actions';
 import { FETCH_QUIZ } from '../constants';
 import { PLAYING, END } from '../constants/gameStates';
-import demoQuiz from './demoQuiz';
+import demoQuiz from '../../mock_api/authorQuiz';
 
 function fetchQuizApi(id) {
   // TODO: Replace mock API

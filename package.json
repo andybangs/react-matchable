@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --config webpack.dev.config.js",
-    "db": "json-server db.json --watch --port 5555",
+    "db": "json-server mock_api/db.json --watch --port 5555",
     "build": "webpack -p --progress --config webpack.prod.config.js"
   },
   "author": "Andy Bangs <andrew.yuta@gmail.com>",
