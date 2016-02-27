@@ -11,6 +11,13 @@ class App extends Component {
     actions.fetchQuiz(routeParams.id);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { actions, routeParams } = this.props;
+    if (nextProps.routeParams.id !== routeParams.id) {
+      actions.fetchQuiz(routeParams.id);
+    }
+  }
+
   render() {
     const { quiz, timer, actions } = this.props;
     return (
