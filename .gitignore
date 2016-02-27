@@ -2,3 +2,4 @@ node_modules/
 npm-debug.log
 dist/vendors.bundle.js
 dist/app.bundle.js
+mock_api/db.json
