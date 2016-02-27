@@ -1,5 +1,10 @@
-import { flatten, shuffle, sortBy, take } from 'lodash';
-import { START } from '../src/constants/gameStates';
+'use strict';
+
+const flatten = require('lodash').flatten;
+const shuffle = require('lodash').shuffle;
+const sortBy = require('lodash').sortBy;
+const take = require('lodash').take;
+const START = 'START';
 
 /* -- TYPES --------------------------------------------------------------------
 type alias Item = {
@@ -56,12 +61,14 @@ function alphaSort(ms, id) {
 // parseColumns :: Array Matchable -> Array Number -> (a -> a) -> Array (Array Matchable)
 function parseColumns(ms, itemIds, sortFn) {
   return itemIds.map(id =>
-    sortFn(ms, id).map(m => ({ ...m, items: m.items.filter(i => i.id === id) }))
+    sortFn(ms, id).map(m =>
+      Object.assign({}, m, { items: m.items.filter(i => i.id === id) })
+    )
   );
 }
 
 // item :: Number -> Number -> String -> Item
-export function item(mid, id, value) {
+exports.item = function item(mid, id, value) {
   return {
     mid,
     id,
@@ -69,19 +76,19 @@ export function item(mid, id, value) {
     selected: false,
     focused: false,
   };
-}
+};
 
 // matchable :: Number -> Array Item -> Matchable
-export function matchable(id, items) {
+exports.matchable = function matchable(id, items) {
   return {
     id,
     items,
     matched: false,
   };
-}
+};
 
 // quiz :: QuizData -> QuizConfig -> QuizState
-export function quiz(data, config) {
+exports.quiz = function quiz(data, config) {
   const itemIdsArr = parseItemIds(data);
   const sortFn = config.alphabetical ? alphaSort : shuffle;
   const columnsArr = parseColumns(data, itemIdsArr, sortFn);
@@ -100,4 +107,4 @@ export function quiz(data, config) {
     gameState: START,
     timerSeconds: config.timerSeconds,
   };
-}
+};

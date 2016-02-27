@@ -1,4 +1,8 @@
-import { item, matchable, quiz } from './quizBuilder';
+'use strict';
+
+const item = require('./quizBuilder').item;
+const matchable = require('./quizBuilder').matchable;
+const quiz = require('./quizBuilder').quiz;
 
 const quizConfig = {
   title: 'TV Characters',
@@ -19,4 +23,4 @@ const quizData = [
   matchable(6, [item(6, 0, 'Michael Bluth'), item(6, 1, 'Tobias Fünke'), item(6, 2, 'Steve Holt')]),
 ];
 
-export default quiz(quizData, quizConfig);
+module.exports = quiz(quizData, quizConfig);

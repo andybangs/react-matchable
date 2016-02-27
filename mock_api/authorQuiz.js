@@ -1,4 +1,8 @@
-import { item, matchable, quiz } from './quizBuilder';
+'use strict';
+
+const item = require('./quizBuilder').item;
+const matchable = require('./quizBuilder').matchable;
+const quiz = require('./quizBuilder').quiz;
 
 const quizConfig = {
   title: 'Famous Literary Novels',
@@ -24,4 +28,4 @@ const quizData = [
   matchable(11, [item(11, 0, 'One Hundred Years of Solitude'), item(11, 1, 'Gabriel Garcí­a Márquez')]),
 ];
 
-export default quiz(quizData, quizConfig);
+module.exports = quiz(quizData, quizConfig);

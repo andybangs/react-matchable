@@ -1,4 +1,8 @@
-import { item, matchable, quiz } from './quizBuilder';
+'use strict';
+
+const item = require('./quizBuilder').item;
+const matchable = require('./quizBuilder').matchable;
+const quiz = require('./quizBuilder').quiz;
 
 const quizConfig = {
   title: 'U.S. Capitals',
@@ -63,4 +67,4 @@ const quizData = [
   matchable(50, [item(50, 0, 'Wyoming'), item(50, 1, 'Cheyenne')]),
 ];
 
-export default quiz(quizData, quizConfig);
+module.exports = quiz(quizData, quizConfig);
