@@ -18,6 +18,10 @@ class App extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.actions.resetState();
+  }
+
   render() {
     const { quiz, timer, actions } = this.props;
     return (
