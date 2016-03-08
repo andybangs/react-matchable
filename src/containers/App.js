@@ -8,6 +8,7 @@ import AppRouter from '../components/AppRouter';
 class App extends Component {
   componentWillMount() {
     const { actions, routeParams } = this.props;
+    console.log(this.props);
     actions.fetchQuiz(routeParams.id);
   }
 
