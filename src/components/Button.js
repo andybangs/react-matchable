@@ -17,8 +17,9 @@ const styles = {
     minWidth: 100,
     color: '#ebf0f4',
     backgroundColor: '#7bbdcf',
+    transition: 'all 0.2s ease',
     ':hover': {
-      backgroundColor: '#f6a7e4',
+      backgroundColor: '#74b1c1',
     },
   },
 };
