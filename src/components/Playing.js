@@ -34,6 +34,8 @@ const Playing = (props) => {
         <Button clickHandler={pause}>Pause</Button>
       </div>
 
+      <div style={styles.buffer}></div>
+
       <div style={styles.body}>
         <QuizBody
           gameState={gameState}
@@ -64,10 +66,13 @@ const styles = {
     borderBottom: '2px solid #665e5e',
   },
   body: {
-    height: '85%',
+    height: '80%',
     display: 'flex',
     flexFlow: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+  },
+  buffer: {
+    height: '5%',
   },
 };
 
