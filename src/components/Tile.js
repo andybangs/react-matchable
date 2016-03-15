@@ -15,6 +15,7 @@ const styles = {
   },
   header: {
     fontSize: '0.8em',
+    fontWeight: 700,
   },
   body: {
     fontSize: '1.5em',

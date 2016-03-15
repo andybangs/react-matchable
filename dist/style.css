@@ -7,3 +7,12 @@ body {
   font: 18px 'Roboto Mono', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 300;
 }
+
+.initial-appear {
+  opacity: 0.01;
+}
+
+.initial-appear.initial-appear-active {
+  opacity: 1;
+  transition: opacity .3s ease-in;
+}

@@ -60,6 +60,8 @@ const styles = {
     flexFlow: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
+    borderTop: '2px solid #665e5e',
+    borderBottom: '2px solid #665e5e',
   },
   body: {
     height: '85%',

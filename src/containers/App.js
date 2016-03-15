@@ -47,10 +47,10 @@ const styles = {
     color: '#665e5e',
   },
   header: {
-    height: '10%',
+    height: '12%',
   },
   body: {
-    height: '90%',
+    height: '88%',
   },
 };
 

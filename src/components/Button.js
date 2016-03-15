@@ -12,9 +12,9 @@ const Button = ({ clickHandler, children }) =>
 const styles = {
   button: {
     border: 0,
-    borderRadius: 1,
+    borderRadius: 2,
     padding: 7,
-    minWidth: 100,
+    minWidth: 80,
     color: '#ebf0f4',
     backgroundColor: '#7bbdcf',
     transition: 'all 0.2s ease',

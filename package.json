@@ -38,6 +38,7 @@
     "lodash-es": "^4.5.1",
     "radium": "^0.16.6",
     "react": "^0.14.7",
+    "react-addons-css-transition-group": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",

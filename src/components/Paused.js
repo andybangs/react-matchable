@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import { PLAYING, END } from '../constants/gameStates';
+import { PLAYING } from '../constants/gameStates';
+import PausedBody from './PausedBody';
 import Tile from './Tile';
 import Timer from './Timer';
 import Button from './Button';
@@ -17,10 +18,6 @@ const Paused = (props) => {
     setState(PLAYING);
   }
 
-  function quit() {
-    setState(END);
-  }
-
   return (
     <div style={styles.container}>
 
@@ -33,8 +30,7 @@ const Paused = (props) => {
       </div>
 
       <div style={styles.body}>
-        <span style={styles.message}>Phew! Take a breath.</span>
-        <Button clickHandler={quit}>I'm over it!</Button>
+        <PausedBody setState={setState} />
       </div>
 
     </div>
@@ -54,6 +50,8 @@ const styles = {
     flexFlow: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
+    borderTop: '2px solid #665e5e',
+    borderBottom: '2px solid #665e5e',
   },
   body: {
     height: '85%',

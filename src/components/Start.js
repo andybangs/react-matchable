@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { PLAYING } from '../constants/gameStates';
 import Button from './Button';
 
@@ -10,18 +11,24 @@ const Start = (props) => {
   }
 
   return (
-    <div style={styles.container}>
+    <ReactCSSTransitionGroup
+      transitionName="initial"
+      transitionAppear={true}
+      transitionAppearTimeout={500}
+    >
+      <div style={styles.container}>
 
-      <div style={styles.header}>
-        <span style={styles.title}>{title}</span>
-        <span style={styles.description}>{description}</span>
+        <div style={styles.header}>
+          <span style={styles.title}>{title}</span>
+          <span style={styles.description}>{description}</span>
+        </div>
+
+        <div style={styles.body}>
+          <Button clickHandler={play}>Play</Button>
+        </div>
+
       </div>
-
-      <div style={styles.body}>
-        <Button clickHandler={play}>Play</Button>
-      </div>
-
-    </div>
+    </ReactCSSTransitionGroup>
   );
 };
 

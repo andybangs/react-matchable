@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Radium from 'radium';
 import { flatten, head } from 'lodash';
 import { PLAYING, END } from '../constants/gameStates';
@@ -96,9 +97,15 @@ const QuizBody = (props) => {
   });
 
   return (
-    <div style={styles.container}>
-        {columnsArr}
-    </div>
+    <ReactCSSTransitionGroup
+      transitionName="initial"
+      transitionAppear={true}
+      transitionAppearTimeout={500}
+    >
+      <div style={styles.container}>
+          {columnsArr}
+      </div>
+    </ReactCSSTransitionGroup>
   );
 };
 
@@ -123,8 +130,6 @@ const styles = {
     alignItems: 'center',
   },
   ul: {
-    flex: 1,
-    height: '90%',
     padding: 0,
     margin: 0,
     listStyle: 'none',
@@ -136,11 +141,11 @@ const styles = {
     justifyContent: 'center',
   },
   li: {
-    backgroundColor: '#fff',
+    backgroundColor: '#fcfcfc',
     boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
     margin: 4,
-    padding: 7,
-    borderRadius: 3,
+    padding: 5,
+    borderRadius: 2,
     fontSize: '0.9em',
     textAlign: 'center',
     cursor: 'pointer',
