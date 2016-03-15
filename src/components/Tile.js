@@ -12,13 +12,14 @@ const styles = {
     flexFlow: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    height: '10vh',
   },
   header: {
-    fontSize: '0.8em',
+    fontSize: '3vh',
     fontWeight: 700,
   },
   body: {
-    fontSize: '1.5em',
+    fontSize: '5vh',
   },
 };
 

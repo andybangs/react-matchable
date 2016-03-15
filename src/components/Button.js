@@ -15,6 +15,7 @@ const styles = {
     borderRadius: 2,
     padding: 7,
     minWidth: 80,
+    minHeight: '8vh',
     color: '#ebf0f4',
     backgroundColor: '#7bbdcf',
     transition: 'all 0.2s ease',

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 const AppHeader = ({ title }) =>
   <div style={styles.container}>
-    <h2>{title}</h2>
+    <span style={styles.header}>{title}</span>
   </div>;
 
 const styles = {
@@ -11,6 +11,10 @@ const styles = {
     flexFlow: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  header: {
+    fontSize: '5vh',
+    fontWeight: '700',
   },
 };
 
